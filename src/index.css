@@ -18,3 +18,28 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.scrollbar-transparent::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollbar-transparent::-webkit-scrollbar-track {
+  background: transparent; /* Nền thanh cuộn trong suốt */
+}
+
+.scrollbar-transparent::-webkit-scrollbar-thumb {
+  background-color: rgba(100, 100, 100, 0.4); /* Màu con lăn */
+  border-radius: 9999px; /* Bo tròn con lăn */
+}
+
+.scrollbar-transparent::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(100, 100, 100, 0.8); /* Đậm hơn khi hover */
+}
+.line {
+  background: linear-gradient(
+    90deg,
+    rgba(127, 127, 127, 0) 0%,
+    rgba(127, 127, 127, 0.4) 2%,
+    rgba(127, 127, 127, 0.4) 98%,
+    rgba(127, 127, 127, 0) 100%
+  );
+}

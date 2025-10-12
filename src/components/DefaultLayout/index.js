@@ -16,10 +16,13 @@ function DefaultLayout({ children }) {
         alt=""
         className="w-[75vw] h-full absolute left-[25vw] z-[-1]"
       />
-      <div className="w-[75vw] flex justify-center ">
-        <div>
-          <div className="w-[50vw] h-[90vh]">{children}</div>
-          <div className="flex relative">
+      <div className="w-[75vw] flex items-center flex-col">
+        <div className="w-[75vw] h-[88vh] flex justify-center mb-1 overflow-y-auto scrollbar-transparent">
+          <div className="w-[50vw] ml-3">{children}</div>
+        </div>
+        <div className="line h-[1px] w-[50vw] mb-5 bg-white"></div>
+        <div className="w-[50vw] flex justify-center ">
+          <div className="flex relative w-full">
             <div className="w-[2.4rem] h-[2.4rem] absolute top-[12px] left-[13px] bg-[rgb(135,116,225)] rounded-[0.75rem] flex items-center justify-center ">
               <FontAwesomeIcon
                 icon={faBars}
