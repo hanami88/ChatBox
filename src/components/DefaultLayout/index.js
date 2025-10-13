@@ -6,6 +6,9 @@ import {
   faPaperclip,
   faMicrophone,
   FontAwesomeIcon,
+  faMagnifyingGlass,
+  faEllipsisVertical,
+  faPhone,
 } from "../Icon";
 function DefaultLayout({ children }) {
   return (
@@ -17,6 +20,39 @@ function DefaultLayout({ children }) {
         className="w-[75vw] h-full absolute left-[25vw] z-[-1]"
       />
       <div className="w-[75vw] flex items-center flex-col">
+        <div className="fixed top-0 right-0 w-[75vw] h-[5.6rem] bg-[#212121] shadowname flex justify-between items-center">
+          <div className="flex items-center ml-[2vw] w-[14.3rem] justify-between">
+            <img
+              src="liemlol.jpg"
+              alt="anh"
+              className="rounded-[1rem] h-[4.5rem] w-[4.5rem]"
+            />
+            <div>
+              <div className="text-[1.7rem] text-white font-[600]">
+                Thanh Liêm
+              </div>
+              <div className="text-[1.4rem] text-[#AAAAAA] mt-[-0.3rem]">
+                Online
+              </div>
+            </div>
+          </div>
+          <div className="flex items-center w-[11rem] justify-between mr-[2.5rem]">
+            <FontAwesomeIcon
+              icon={faMagnifyingGlass}
+              className="text-[rgb(170,170,170)] text-[2rem]"
+            />
+            <FontAwesomeIcon
+              icon={faPhone}
+              className="text-[rgb(170,170,170)] text-[2rem]"
+            />
+            <div className="w-[2.1rem] h-[2.1rem] flex items-center justify-center">
+              <FontAwesomeIcon
+                icon={faEllipsisVertical}
+                className="text-[rgb(170,170,170)] text-[1.8rem]"
+              />
+            </div>
+          </div>
+        </div>
         <div className="w-[75vw] h-[88vh] flex justify-center mb-1 overflow-y-auto scrollbar-transparent">
           <div className="w-[50vw] ml-3">{children}</div>
         </div>
