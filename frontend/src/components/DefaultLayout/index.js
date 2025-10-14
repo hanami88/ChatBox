@@ -15,7 +15,7 @@ import { useState } from "react";
 function DefaultLayout({ children }) {
   const [check, setCheck] = useState(false);
   const checkMessage = (message) => {
-    if (message != "") {
+    if (message !== "") {
       setCheck(() => true);
     } else setCheck(() => false);
   };
