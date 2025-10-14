@@ -18,7 +18,7 @@ function Sidebar() {
             focus:border-[rgb(135,116,225)]
             focus:bg-[#1e1e1e]
             focus:outline-none text-[1.6rem]"
-            placeholder="Search"
+            placeholder="検索"
           />
           <FontAwesomeIcon
             icon={faMagnifyingGlass}
@@ -27,10 +27,10 @@ function Sidebar() {
         </div>
         <div className="flex text-[1.6rem] h-[4.4rem] items-center shadow-[0_2px_2px_rgba(0,0,0,0.25)]">
           <div className="text-[#AAAAAA] text-[1.6rem] font-[600] w-[5.5rem] h-full flex items-center justify-center ml-[1rem] rounded-[1rem] hover:text-[#8774E1] cursor-pointer ">
-            <span>All</span>
+            <span>全て</span>
           </div>
           <div className="text-[#AAAAAA] text-[1.6rem] font-[600] w-[6.9rem] h-full flex items-center justify-center rounded-[1rem] hover:text-[#8774E1] cursor-pointer">
-            <span>Chat</span>
+            <span>チャット</span>
           </div>
         </div>
       </div>
@@ -43,7 +43,7 @@ function Sidebar() {
           />
           <div className="w-[27rem] rounded-[1.2rem]">
             <div className="flex items-center justify-between ">
-              <div className="text-[1.6rem] font-[600]">Chat Box</div>
+              <div className="text-[1.6rem] font-[600]">友コネクト</div>
               <div className="text-[1.2rem] rounded-[1.2rem] mr-5">13:26</div>
             </div>
             <div className="text-[1.5rem]">Telegram Web A Digest</div>

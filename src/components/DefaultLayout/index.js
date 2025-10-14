@@ -9,8 +9,16 @@ import {
   faMagnifyingGlass,
   faEllipsisVertical,
   faPhone,
+  faPaperPlane,
 } from "../Icon";
+import { useState } from "react";
 function DefaultLayout({ children }) {
+  const [check, setCheck] = useState(false);
+  const checkMessage = (message) => {
+    if (message != "") {
+      setCheck(() => true);
+    } else setCheck(() => false);
+  };
   return (
     <div className="DefaultLayout h-screen w-full flex  bg-[length:100%_100%] bg-center relative">
       <Sidebar />
@@ -32,7 +40,7 @@ function DefaultLayout({ children }) {
                 Thanh Liêm
               </div>
               <div className="text-[1.4rem] text-[#AAAAAA] mt-[-0.3rem]">
-                Online
+                オンライン
               </div>
             </div>
           </div>
@@ -71,11 +79,14 @@ function DefaultLayout({ children }) {
             />
             <textarea
               className="text-[1.5rem] resize-none pl-[8.8rem] pr-[9.5rem] py-5 w-[92%] h-[4.8rem] rounded-[1rem] bg-[#1e1e1e] placeholder:text-[#dcdcdcb3] text-white outline-none"
-              placeholder="Message"
+              placeholder="メッセージ"
+              onChange={(e) => checkMessage(e.target.value)}
             />
             <FontAwesomeIcon
               icon={faHexagonNodes}
-              className="text-[2.4rem] text-[#7c7c7c] absolute top-[12px] right-[113px] cursor-pointer hover:text-[rgb(135,116,225)]"
+              className={`${
+                check && "hidden"
+              } text-[2.4rem] text-[#7c7c7c] absolute top-[12px] right-[113px] cursor-pointer hover:text-[rgb(135,116,225)]`}
             />
             <FontAwesomeIcon
               icon={faPaperclip}
@@ -83,8 +94,10 @@ function DefaultLayout({ children }) {
             />
             <div className="group h-[4.8rem] w-[4.8rem] rounded-full flex justify-center items-center bg-[#212121] ml-5 cursor-pointer hover:text-white hover:bg-[rgb(135,116,225)]">
               <FontAwesomeIcon
-                icon={faMicrophone}
-                className="text-[2.3rem] text-[#7c7c7c] group-hover:text-white"
+                icon={check ? faPaperPlane : faMicrophone}
+                className={`text-[2.3rem] group-hover:text-white ${
+                  check ? "text-[rgb(135,116,225)]" : "text-[#7c7c7c]"
+                }`}
               />
             </div>
           </div>
