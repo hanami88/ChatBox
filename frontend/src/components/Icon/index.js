@@ -8,6 +8,12 @@ import {
   faPhone,
   faEllipsisVertical,
   faPaperPlane,
+  faPlus,
+  faBookmark,
+  faUser,
+  faGear,
+  faUserGroup,
+  faCircleHalfStroke,
 } from "@fortawesome/free-solid-svg-icons";
 import { faFaceSmile } from "@fortawesome/free-regular-svg-icons";
 export {
@@ -21,4 +27,10 @@ export {
   faEllipsisVertical,
   faMicrophone,
   faPaperPlane,
+  faPlus,
+  faBookmark,
+  faUser,
+  faGear,
+  faUserGroup,
+  faCircleHalfStroke,
 };

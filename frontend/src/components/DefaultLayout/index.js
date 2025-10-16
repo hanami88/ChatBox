@@ -11,13 +11,19 @@ import {
   faPhone,
   faPaperPlane,
 } from "../Icon";
-import { useState } from "react";
+import { useState, useRef } from "react";
 function DefaultLayout({ children }) {
   const [check, setCheck] = useState(false);
+  const [line, setLine] = useState(true);
   const checkMessage = (message) => {
     if (message !== "") {
       setCheck(() => true);
     } else setCheck(() => false);
+  };
+  const checkLine = (height) => {
+    if (height < 1098) {
+      setLine(() => false);
+    } else setLine(() => true);
   };
   return (
     <div className="DefaultLayout h-screen w-full flex  bg-[length:100%_100%] bg-center relative">
@@ -28,7 +34,7 @@ function DefaultLayout({ children }) {
         className="w-[75vw] h-full absolute left-[25vw] z-[-1]"
       />
       <div className="w-[75vw] flex items-center flex-col">
-        <div className="fixed top-0 right-0 w-[75vw] h-[5.6rem] bg-[#212121] shadowname flex justify-between items-center">
+        <div className="fixed top-0 right-0 w-[75vw] h-[5.6rem] bg-[#212121] shadowname flex justify-between items-center ">
           <div className="flex items-center ml-[2vw] w-[14.3rem] justify-between">
             <img
               src="liemlol.jpg"
@@ -61,10 +67,17 @@ function DefaultLayout({ children }) {
             </div>
           </div>
         </div>
-        <div className="w-[75vw] h-[88vh] flex justify-center mb-1 overflow-y-auto scrollbar-transparent">
+        <div
+          className="w-[75vw] h-[88vh] pt-[7rem] flex justify-center mb-1 overflow-y-auto scrollbar-transparent"
+          onScroll={(e) => checkLine(e.target.scrollTop)}
+        >
           <div className="w-[50vw] ml-3">{children}</div>
         </div>
-        <div className="line h-[1px] w-[50vw] mb-5 bg-white"></div>
+        <div
+          className={`h-[1px] w-[50vw] mb-5 ${
+            line ? "bg-white line" : "bg-[#00000000]"
+          }`}
+        ></div>
         <div className="w-[50vw] flex justify-center ">
           <div className="flex relative w-full">
             <div className="w-[2.4rem] h-[2.4rem] absolute top-[12px] left-[13px] bg-[rgb(135,116,225)] rounded-[0.75rem] flex items-center justify-center ">

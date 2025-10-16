@@ -1,14 +1,98 @@
-import { faBars, FontAwesomeIcon, faMagnifyingGlass } from "../Icon";
+import { useState } from "react";
+import {
+  faBars,
+  FontAwesomeIcon,
+  faMagnifyingGlass,
+  faPlus,
+  faBookmark,
+  faUser,
+  faGear,
+  faUserGroup,
+  faCircleHalfStroke,
+} from "../Icon";
 function Sidebar() {
+  const [isOpen, setIsOpen] = useState(false);
+  const checkOpen = () => {
+    if (isOpen) setIsOpen(false);
+    else setIsOpen(true);
+  };
   return (
-    <div className="w-[25vw] bg-[#212121]  h-full text-[1.7rem] border-r-[1px] border-[#48484874]">
+    <div className="w-[25vw] bg-[#212121] h-full text-[1.7rem] border-r-[1px] border-[#48484874]">
       <div className="mb-4">
         <div className="flex justify-center items-center relative h-[5.6rem] ">
-          <div className=" bg-[#2C2C2C] h-[4rem] w-[4rem] flex justify-center items-center text-center rounded-[50%]">
+          <div
+            className={` ${
+              isOpen ? "bg-[#2C2C2C]" : "bg-[#212121]"
+            } cursor-pointer relative h-[4rem] w-[4rem] flex justify-center items-center text-center rounded-[50%] hover:bg-[#2C2C2C]`}
+          >
             <FontAwesomeIcon
               icon={faBars}
-              className="text-[2.2rem] text-[#ffffffaf] bg-[#2C2C2C]"
+              className="text-[2.2rem] text-[#ffffffaf] "
+              onClick={() => checkOpen()}
             />
+            <div
+              className={`${
+                isOpen ? "" : "hidden"
+              }  w-[25rem] text-[1.4rem] font-[500] text-[white] h-[31rem] bg-[rgba(33,33,33,0.867)] shadow absolute top-[4.8rem] left-[0rem] backdrop-blur-[1rem] rounded-[0.75rem] `}
+            >
+              <div className="flex items-center h-[3.2rem] py-[0.4rem] pr-[1.2rem] pl-[0.4rem] mx-[0.4rem] mt-[0.6rem] mb-[0.4rem] hover:bg-[#00000066] rounded-[0.5rem] ">
+                <img
+                  src="logo.png"
+                  alt=""
+                  className="w-[2.4rem] h-[2.4rem] ml-[0.5rem] mr-[2rem]"
+                />
+                <div>admin</div>
+              </div>
+              <div className="bg-[#FFFFFF1A] h-[0.1rem] w-full"></div>
+              <div className="flex items-center h-[3.2rem] py-[0.4rem] pr-[1.2rem] pl-[0.4rem] mx-[0.4rem] my-[0.4rem] hover:bg-[#00000066] rounded-[0.5rem]">
+                <FontAwesomeIcon
+                  icon={faPlus}
+                  className=" text-[1.6rem] text-[rgb(170,170,170)] ml-[0.7rem] mr-[2.2rem]"
+                />
+                <div>Add Account</div>
+              </div>
+              <div className="bg-[#FFFFFF1A] h-[0.1rem] w-full"></div>
+              <div className="flex items-center h-[3.2rem] py-[0.4rem] pr-[1.2rem] pl-[0.4rem] mx-[0.4rem] my-[0.4rem] hover:bg-[#00000066] rounded-[0.5rem]">
+                <FontAwesomeIcon
+                  icon={faUser}
+                  className=" text-[1.6rem] text-[rgb(170,170,170)] ml-[0.7rem] mr-[2.2rem]"
+                />
+                <div>My Profile</div>
+              </div>
+              <div className="flex items-center h-[3.2rem] py-[0.4rem] pr-[1.2rem] pl-[0.4rem] mx-[0.4rem] my-[0.4rem] hover:bg-[#00000066] rounded-[0.5rem]">
+                <FontAwesomeIcon
+                  icon={faBookmark}
+                  className=" text-[1.6rem] text-[rgb(170,170,170)] ml-[0.7rem] mr-[2.2rem]"
+                />
+                <div>Saved Messages</div>
+              </div>
+              <div className="flex items-center h-[3.2rem] py-[0.4rem] pr-[1.2rem] pl-[0.4rem] mx-[0.4rem] my-[0.4rem] hover:bg-[#00000066] rounded-[0.5rem]">
+                <FontAwesomeIcon
+                  icon={faUserGroup}
+                  className=" text-[1.6rem] text-[rgb(170,170,170)] ml-[0.7rem] mr-[2.2rem]"
+                />
+                <div>Contacts</div>
+              </div>
+              <div className="flex items-center h-[3.2rem] py-[0.4rem] pr-[1.2rem] pl-[0.4rem] mx-[0.4rem] my-[0.4rem] hover:bg-[#00000066] rounded-[0.5rem]">
+                <FontAwesomeIcon
+                  icon={faGear}
+                  className=" text-[1.6rem] text-[rgb(170,170,170)] ml-[0.7rem] mr-[2.2rem]"
+                />
+                <div>Setting</div>
+              </div>
+              <div className="flex items-center h-[3.2rem] py-[0.4rem] pr-[1.2rem] pl-[0.4rem] mx-[0.4rem] my-[0.4rem] hover:bg-[#00000066] rounded-[0.5rem]">
+                <FontAwesomeIcon
+                  icon={faCircleHalfStroke}
+                  className=" text-[1.6rem] text-[rgb(170,170,170)] ml-[0.7rem] mr-[2.2rem]"
+                />
+                <div>Night Mode</div>
+              </div>
+              <div className="h-[3.55rem] w-full flex items-center justify-center mt-3 cursor-default">
+                <div className="text-[#AAAAAA] text-[1.3rem]">
+                  友コネクト 12.0.3
+                </div>
+              </div>
+            </div>
           </div>
           <input
             type="text"
