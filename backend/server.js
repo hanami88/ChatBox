@@ -1,10 +1,33 @@
 import express from "express";
+import http from "http";
+import { Server } from "socket.io";
 
 const app = express();
-const PORT = 8080;
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:3000", // React app
+    methods: ["GET", "POST"],
+  },
+});
+const users = {};
+io.on("connection", (socket) => {
+  const { userId } = socket.handshake.auth;
+  users[userId] = socket.id; // ánh xạ userId → socket.id
 
-app.get("/", (req, res) => {
-  res.send("conca");
+  console.log("Users online:", users);
+  socket.on("message", ({ userId, message }) => {
+    console.log(`📩 From ${userId}: ${message} `);
+
+    // Gửi lại cho tất cả client, kèm theo thông tin người gửi
+    io.emit("message", {
+      userId: userId,
+      message: message,
+    });
+  });
+  socket.on("disconnect", () => {
+    delete users[userId]; // xóa khi out
+  });
 });
 
-app.listen(8080, () => console.log(`Server listening on port ${PORT}`));
+server.listen(8080, () => console.log("🚀 Server running on port 8080"));

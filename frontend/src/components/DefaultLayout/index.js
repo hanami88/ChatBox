@@ -11,11 +11,18 @@ import {
   faPhone,
   faPaperPlane,
 } from "../Icon";
-import { useState, useRef } from "react";
+import socket from "../Socket";
+import { useState } from "react";
 function DefaultLayout({ children }) {
+  const userId = localStorage.getItem("userId");
   const [check, setCheck] = useState(false);
   const [line, setLine] = useState(true);
-  const checkMessage = (message) => {
+  const [message, setMessage] = useState([]);
+  const sendMessage = () => {
+    socket.emit("message", { userId, message });
+    setMessage("");
+  };
+  const checkBtn = (message) => {
     if (message !== "") {
       setCheck(() => true);
     } else setCheck(() => false);
@@ -91,9 +98,13 @@ function DefaultLayout({ children }) {
               className="text-[2.4rem] text-[#7c7c7c] absolute top-[12px] left-[47px] cursor-pointer hover:text-[rgb(135,116,225)]"
             />
             <textarea
+              value={message}
               className="text-[1.5rem] resize-none pl-[8.8rem] pr-[9.5rem] py-5 w-[92%] h-[4.8rem] rounded-[1rem] bg-[#1e1e1e] placeholder:text-[#dcdcdcb3] text-white outline-none"
               placeholder="メッセージ"
-              onChange={(e) => checkMessage(e.target.value)}
+              onChange={(e) => {
+                checkBtn(e.target.value);
+                setMessage(e.target.value);
+              }}
             />
             <FontAwesomeIcon
               icon={faHexagonNodes}
@@ -108,6 +119,13 @@ function DefaultLayout({ children }) {
             <div className="group h-[4.8rem] w-[4.8rem] rounded-full flex justify-center items-center bg-[#212121] ml-5 cursor-pointer hover:text-white hover:bg-[rgb(135,116,225)]">
               <FontAwesomeIcon
                 icon={check ? faPaperPlane : faMicrophone}
+                onClick={
+                  check &&
+                  (() => {
+                    sendMessage();
+                    setCheck(false);
+                  })
+                }
                 className={`text-[2.3rem] group-hover:text-white ${
                   check ? "text-[rgb(135,116,225)]" : "text-[#7c7c7c]"
                 }`}
