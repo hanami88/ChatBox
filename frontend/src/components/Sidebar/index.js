@@ -9,7 +9,7 @@ import {
   faGear,
   faUserGroup,
   faCircleHalfStroke,
-} from "../Icon";
+} from "../../Icon";
 function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const checkOpen = () => {
@@ -41,7 +41,7 @@ function Sidebar() {
                   alt=""
                   className="w-[2.4rem] h-[2.4rem] ml-[0.5rem] mr-[2rem]"
                 />
-                <div>admin</div>
+                <div>友コネクト</div>
               </div>
               <div className="bg-[#FFFFFF1A] h-[0.1rem] w-full"></div>
               <div className="flex items-center h-[3.2rem] py-[0.4rem] pr-[1.2rem] pl-[0.4rem] mx-[0.4rem] my-[0.4rem] hover:bg-[#00000066] rounded-[0.5rem]">
@@ -49,7 +49,7 @@ function Sidebar() {
                   icon={faPlus}
                   className=" text-[1.6rem] text-[rgb(170,170,170)] ml-[0.7rem] mr-[2.2rem]"
                 />
-                <div>Add Account</div>
+                <div>アカウントを追加</div>
               </div>
               <div className="bg-[#FFFFFF1A] h-[0.1rem] w-full"></div>
               <div className="flex items-center h-[3.2rem] py-[0.4rem] pr-[1.2rem] pl-[0.4rem] mx-[0.4rem] my-[0.4rem] hover:bg-[#00000066] rounded-[0.5rem]">
@@ -57,35 +57,35 @@ function Sidebar() {
                   icon={faUser}
                   className=" text-[1.6rem] text-[rgb(170,170,170)] ml-[0.7rem] mr-[2.2rem]"
                 />
-                <div>My Profile</div>
+                <div>マイプロフィール</div>
               </div>
               <div className="flex items-center h-[3.2rem] py-[0.4rem] pr-[1.2rem] pl-[0.4rem] mx-[0.4rem] my-[0.4rem] hover:bg-[#00000066] rounded-[0.5rem]">
                 <FontAwesomeIcon
                   icon={faBookmark}
                   className=" text-[1.6rem] text-[rgb(170,170,170)] ml-[0.7rem] mr-[2.2rem]"
                 />
-                <div>Saved Messages</div>
+                <div>保存されたメッセージ</div>
               </div>
               <div className="flex items-center h-[3.2rem] py-[0.4rem] pr-[1.2rem] pl-[0.4rem] mx-[0.4rem] my-[0.4rem] hover:bg-[#00000066] rounded-[0.5rem]">
                 <FontAwesomeIcon
                   icon={faUserGroup}
                   className=" text-[1.6rem] text-[rgb(170,170,170)] ml-[0.7rem] mr-[2.2rem]"
                 />
-                <div>Contacts</div>
+                <div>連絡先</div>
               </div>
               <div className="flex items-center h-[3.2rem] py-[0.4rem] pr-[1.2rem] pl-[0.4rem] mx-[0.4rem] my-[0.4rem] hover:bg-[#00000066] rounded-[0.5rem]">
                 <FontAwesomeIcon
                   icon={faGear}
                   className=" text-[1.6rem] text-[rgb(170,170,170)] ml-[0.7rem] mr-[2.2rem]"
                 />
-                <div>Setting</div>
+                <div>設定</div>
               </div>
               <div className="flex items-center h-[3.2rem] py-[0.4rem] pr-[1.2rem] pl-[0.4rem] mx-[0.4rem] my-[0.4rem] hover:bg-[#00000066] rounded-[0.5rem]">
                 <FontAwesomeIcon
                   icon={faCircleHalfStroke}
                   className=" text-[1.6rem] text-[rgb(170,170,170)] ml-[0.7rem] mr-[2.2rem]"
                 />
-                <div>Night Mode</div>
+                <div>ナイトモード</div>
               </div>
               <div className="h-[3.55rem] w-full flex items-center justify-center mt-3 cursor-default">
                 <div className="text-[#AAAAAA] text-[1.3rem]">

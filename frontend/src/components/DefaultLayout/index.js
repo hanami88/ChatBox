@@ -10,8 +10,8 @@ import {
   faEllipsisVertical,
   faPhone,
   faPaperPlane,
-} from "../Icon";
-import socket from "../Socket";
+} from "../../Icon";
+import socket from "../../services/Socket";
 import { useState } from "react";
 function DefaultLayout({ children }) {
   const userId = localStorage.getItem("userId");
@@ -100,7 +100,7 @@ function DefaultLayout({ children }) {
             <textarea
               value={message}
               className="text-[1.5rem] resize-none pl-[8.8rem] pr-[9.5rem] py-5 w-[92%] h-[4.8rem] rounded-[1rem] bg-[#1e1e1e] placeholder:text-[#dcdcdcb3] text-white outline-none"
-              placeholder="メッセージ"
+              placeholder="メッセージを入力"
               onChange={(e) => {
                 checkBtn(e.target.value);
                 setMessage(e.target.value);

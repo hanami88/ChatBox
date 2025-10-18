@@ -1,22 +1,6 @@
 import { useEffect, useState } from "react";
 import { Fragment } from "react/jsx-runtime";
-import socket from "../Socket";
-
-let message = [
-  {
-    data: "Hello",
-    role: "0",
-  },
-  {
-    data: "Good news, no limits are currently applied to your account. You’re free as a bird!",
-    role: "1",
-  },
-  {
-    data: "Good news, no limits are currently applied to your na. You’re free as a bird!",
-    role: "0",
-  },
-];
-
+import socket from "../../services/Socket";
 function Messages() {
   const [chat, setChat] = useState([]);
   useEffect(() => {
