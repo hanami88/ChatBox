@@ -24,7 +24,7 @@ function RegisterPage() {
           />
           <input
             type="password"
-            placeholder="パスワード（確認"
+            placeholder="パスワード（確認)"
             className="outline-[#71d446] hover:border-[#71d446] text-black border-[0.1rem] border-[rgb(218,220,224)] rounded-[1.2rem] h-[4.8rem] px-[1.8rem] py-[1.1rem] placeholder:text-black mb-[2rem] placeholder:text-[rgb(169,169,169)]"
           />
           <button className="h-[4.8rem] text-[1.65rem] font-[500] text-white bg-[#71d446] rounded-[1.2rem] mb-[2rem]">
