@@ -18,6 +18,7 @@ function RegisterPage() {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
+      alert(data.message);
       if (data.success) {
         navigate("/login-page");
       }
