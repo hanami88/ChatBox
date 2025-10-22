@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function LoginPage() {
+function LoginPage({ setUser }) {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
@@ -10,16 +10,18 @@ function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:8080/dangnhap", {
+      const res = await fetch("http://localhost:8080/api/auth/dangnhap", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
+        credentials: "include",
       });
       const data = await res.json();
       alert(data.message);
       if (data.success) {
+        setUser(true);
         navigate("/");
       }
     } catch (err) {

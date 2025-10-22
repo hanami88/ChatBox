@@ -1,7 +1,8 @@
-import User from "../models/User.js"; // Thêm .js
-import bcrypt from "bcryptjs";
+import User from "../models/User.js";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
-class App {
+class authController {
   async dangky(req, res) {
     const { username, password, confirmPassword } = req.body;
     if (await User.findOne({ username: username })) {
@@ -25,10 +26,10 @@ class App {
         message: "Tên đăng nhập phải có ít nhất 8 kí tự",
       });
     }
+    const hashedPassword = await bcrypt.hash(password, 10);
     await User.create({
       username,
-      password,
-      confirmPassword,
+      password: hashedPassword,
     });
     res.status(200).json({
       success: true,
@@ -45,13 +46,30 @@ class App {
         .status(400)
         .json({ success: false, message: "Tên đăng nhập không tồn tại" });
     }
-    if (user.password != password) {
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
       return res.status(400).json({ success: false, message: "Sai mật khẩu" });
     }
+    const token = jwt.sign(
+      { id: user._id, username: user.username },
+      process.env.JWT_SECRET,
+      { expiresIn: "10m" }
+    );
+    res.cookie("token", token, {
+      httpOnly: true,
+      maxAge: 10 * 60 * 1000,
+    });
     return res
       .status(200)
       .json({ success: true, message: "Đăng nhập thành công" });
   }
+  async xacnhandangnhap(req, res) {
+    res.status(200).json({
+      success: true,
+      message: "Đã đăng nhập",
+      user: req.user,
+    });
+  }
 }
 
-export default new App();
+export default new authController();

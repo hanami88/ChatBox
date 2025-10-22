@@ -10,7 +10,7 @@ function RegisterPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:8080/dangky", {
+      const res = await fetch("http://localhost:8080/api/auth/dangky", {
         method: "POST",
         headers: {
           "Content-Type": "application/json", // 🟢 Cực kỳ quan trọng

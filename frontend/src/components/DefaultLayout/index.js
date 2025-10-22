@@ -120,11 +120,12 @@ function DefaultLayout({ children }) {
               <FontAwesomeIcon
                 icon={check ? faPaperPlane : faMicrophone}
                 onClick={
-                  check &&
-                  (() => {
-                    sendMessage();
-                    setCheck(false);
-                  })
+                  check
+                    ? () => {
+                        sendMessage();
+                        setCheck(false);
+                      }
+                    : undefined
                 }
                 className={`text-[2.3rem] group-hover:text-white ${
                   check ? "text-[rgb(135,116,225)]" : "text-[#7c7c7c]"
