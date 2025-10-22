@@ -12,7 +12,8 @@ import { useState, useEffect } from "react";
 import PrivateRouter from "./components/PrivateRouter";
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({});
+  const [loading, setLoading] = useState(null);
   useEffect(() => {
     fetch("http://localhost:8080/api/auth/xacnhandangnhap", {
       method: "GET",
@@ -20,7 +21,8 @@ function App() {
     })
       .then((res) => res.json())
       .then((data) => {
-        setUser(data.success);
+        setLoading(data.success);
+        setUser(data.user);
       });
   }, []);
   return (
@@ -30,7 +32,7 @@ function App() {
           <Route
             path="/login-page"
             element={
-              user ? <Navigate to="/" /> : <LoginPage setUser={setUser} />
+              user ? <Navigate to="/" /> : <LoginPage setLoading={setLoading} />
             }
           ></Route>
           <Route
@@ -40,7 +42,7 @@ function App() {
           <Route
             path="/"
             element={
-              <PrivateRouter user={user}>
+              <PrivateRouter user={user} loading={loading}>
                 <DefaultLayout>
                   <Messages />
                 </DefaultLayout>

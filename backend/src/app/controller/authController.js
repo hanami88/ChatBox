@@ -64,10 +64,12 @@ class authController {
       .json({ success: true, message: "Đăng nhập thành công" });
   }
   async xacnhandangnhap(req, res) {
+    const user = await User.findById(req.id);
+    console.log(user);
     res.status(200).json({
       success: true,
       message: "Đã đăng nhập",
-      user: req.user,
+      user: user,
     });
   }
 }

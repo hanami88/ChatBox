@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useContext } from "react";
+import { UserContext } from "../../UserContext.js";
 import {
   faBars,
   FontAwesomeIcon,
@@ -11,6 +13,7 @@ import {
   faCircleHalfStroke,
 } from "../../Icon";
 function Sidebar() {
+  const context = useContext(UserContext);
   const [isOpen, setIsOpen] = useState(false);
   const checkOpen = () => {
     if (isOpen) setIsOpen(false);
@@ -41,7 +44,7 @@ function Sidebar() {
                   alt=""
                   className="w-[2.4rem] h-[2.4rem] ml-[0.5rem] mr-[2rem]"
                 />
-                <div>友コネクト</div>
+                <div>{context.user.username}</div>
               </div>
               <div className="bg-[#FFFFFF1A] h-[0.1rem] w-full"></div>
               <div className="flex items-center h-[3.2rem] py-[0.4rem] pr-[1.2rem] pl-[0.4rem] mx-[0.4rem] my-[0.4rem] hover:bg-[#00000066] rounded-[0.5rem]">
