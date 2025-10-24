@@ -13,7 +13,7 @@ import {
   faCircleHalfStroke,
 } from "../../Icon";
 function Sidebar() {
-  const context = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [isOpen, setIsOpen] = useState(false);
   const checkOpen = () => {
     if (isOpen) setIsOpen(false);
@@ -44,7 +44,7 @@ function Sidebar() {
                   alt=""
                   className="w-[2.4rem] h-[2.4rem] ml-[0.5rem] mr-[2rem]"
                 />
-                <div>{context.user.username}</div>
+                <div>{user.username}</div>
               </div>
               <div className="bg-[#FFFFFF1A] h-[0.1rem] w-full"></div>
               <div className="flex items-center h-[3.2rem] py-[0.4rem] pr-[1.2rem] pl-[0.4rem] mx-[0.4rem] my-[0.4rem] hover:bg-[#00000066] rounded-[0.5rem]">
@@ -122,48 +122,6 @@ function Sidebar() {
         </div>
       </div>
       <div className="w-[25vw] flex items-center text-white flex-col">
-        <div className="h-[7.2rem] w-[95%] rounded-[1.2rem] hover:bg-[rgb(44,44,44)] cursor-pointer flex items-center justify-between">
-          <img
-            src="logo.png"
-            alt="logo"
-            className="w-[5.4rem] h-[5.4rem] rounded-[1rem] ml-4"
-          />
-          <div className="w-[27rem] rounded-[1.2rem]">
-            <div className="flex items-center justify-between ">
-              <div className="text-[1.6rem] font-[600]">友コネクト</div>
-              <div className="text-[1.2rem] rounded-[1.2rem] mr-5">13:26</div>
-            </div>
-            <div className="text-[1.5rem]">Telegram Web A Digest</div>
-          </div>
-        </div>
-        <div className="h-[7.2rem] w-[95%] rounded-[1.2rem] hover:bg-[rgb(44,44,44)] cursor-pointer flex items-center justify-between">
-          <img
-            src="liemlol.jpg"
-            alt="logo"
-            className="w-[5.4rem] h-[5.4rem] rounded-[1rem] ml-4"
-          />
-          <div className="w-[27rem] rounded-[1.2rem]">
-            <div className="flex items-center justify-between ">
-              <div className="text-[1.6rem] font-[600]">Thanh Liêm</div>
-              <div className="text-[1.2rem] rounded-[1.2rem] mr-5">12:26</div>
-            </div>
-            <div className="text-[1.5rem]">Who can stop me ?</div>
-          </div>
-        </div>
-        <div className="h-[7.2rem] w-[95%] rounded-[1.2rem] hover:bg-[rgb(44,44,44)] cursor-pointer flex items-center justify-between">
-          <img
-            src="dulingo.png"
-            alt="logo"
-            className="w-[5.4rem] h-[5.4rem] rounded-[1rem] ml-4"
-          />
-          <div className="w-[27rem] rounded-[1.2rem]">
-            <div className="flex items-center justify-between ">
-              <div className="text-[1.6rem] font-[600]">Dulingo</div>
-              <div className="text-[1.2rem] rounded-[1.2rem] mr-5">14:26</div>
-            </div>
-            <div className="text-[1.5rem]">Dulingo</div>
-          </div>
-        </div>
         <div className="h-[7.2rem] w-[95%] rounded-[1.2rem] hover:bg-[rgb(44,44,44)] cursor-pointer flex items-center justify-between">
           <img
             src="snap.png"

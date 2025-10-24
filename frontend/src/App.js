@@ -12,7 +12,7 @@ import { useState, useEffect } from "react";
 import PrivateRouter from "./components/PrivateRouter";
 
 function App() {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(false);
   const [loading, setLoading] = useState(null);
   useEffect(() => {
     fetch("http://localhost:8080/api/auth/xacnhandangnhap", {
@@ -32,7 +32,11 @@ function App() {
           <Route
             path="/login-page"
             element={
-              user ? <Navigate to="/" /> : <LoginPage setLoading={setLoading} />
+              user ? (
+                <Navigate to="/" />
+              ) : (
+                <LoginPage setLoading={setLoading} setUser={setUser} />
+              )
             }
           ></Route>
           <Route

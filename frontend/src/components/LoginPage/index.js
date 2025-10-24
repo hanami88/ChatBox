@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function LoginPage({ setUser }) {
+function LoginPage({ setLoading, setUser }) {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
@@ -21,7 +21,8 @@ function LoginPage({ setUser }) {
       const data = await res.json();
       alert(data.message);
       if (data.success) {
-        setUser(true);
+        setLoading(true);
+        setUser(data.user);
         navigate("/");
       }
     } catch (err) {
@@ -81,7 +82,7 @@ function LoginPage({ setUser }) {
             ログイン
           </button>
         </form>
-        <a href="register-page" className="text-[#71d446] font-[600]">
+        <a href="/register-page" className="text-[#71d446] font-[600]">
           アカウント登録
         </a>
       </div>

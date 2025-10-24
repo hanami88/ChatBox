@@ -61,7 +61,7 @@ class authController {
     });
     return res
       .status(200)
-      .json({ success: true, message: "Đăng nhập thành công" });
+      .json({ success: true, message: "Đăng nhập thành công", user: user });
   }
   async xacnhandangnhap(req, res) {
     const user = await User.findById(req.id);

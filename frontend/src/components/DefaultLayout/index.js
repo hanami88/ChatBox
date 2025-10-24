@@ -11,15 +11,18 @@ import {
   faPhone,
   faPaperPlane,
 } from "../../Icon";
-import socket from "../../services/Socket";
+import socketConnect from "../../services/Socket";
 import { useState } from "react";
+import { useContext } from "react";
+import { UserContext } from "../../UserContext.js";
 function DefaultLayout({ children }) {
-  const userId = localStorage.getItem("userId");
+  const { user } = useContext(UserContext);
+  const socket = socketConnect(user);
   const [check, setCheck] = useState(false);
   const [line, setLine] = useState(true);
   const [message, setMessage] = useState([]);
   const sendMessage = () => {
-    socket.emit("message", { userId, message });
+    socket.emit("message", { user, message });
     setMessage("");
   };
   const checkBtn = (message) => {

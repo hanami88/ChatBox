@@ -1,6 +1,7 @@
 import { Navigate } from "react-router-dom";
 import { UserContext } from "../../UserContext.js";
 function PrivateRouter({ children, user, loading }) {
+  console.log("caca");
   if (loading === null) {
     return (
       <div className="flex justify-center items-center w-full h-screen">

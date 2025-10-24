@@ -20,7 +20,6 @@ app.use(cookieParser());
 app.use(express.json()); // ← Parse JSON body
 app.use(express.urlencoded({ extended: true }));
 dotenv.config();
-console.log("✅ Middleware đã setup");
 
 await Database();
 
