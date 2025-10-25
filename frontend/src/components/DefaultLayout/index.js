@@ -21,6 +21,7 @@ function DefaultLayout({ children }) {
   const [check, setCheck] = useState(false);
   const [line, setLine] = useState(true);
   const [message, setMessage] = useState([]);
+
   const sendMessage = () => {
     socket.emit("message", { user, message });
     setMessage("");

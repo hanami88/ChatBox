@@ -46,6 +46,7 @@ function BoxSidebar({ contents, hidden }) {
         (content, index) =>
           content._id !== user._id && (
             <div
+              onClick={}
               key={index}
               className="relative h-[7.2rem] w-[95%] rounded-[1.2rem] hover:bg-[rgb(44,44,44)] cursor-pointer flex items-center justify-between"
             >
@@ -54,12 +55,14 @@ function BoxSidebar({ contents, hidden }) {
                 alt="logo"
                 className="w-[5.4rem] h-[5.4rem] rounded-[1rem] ml-4"
               />
-              <div className="w-[27rem] rounded-[1.2rem]">
+              <div className="w-[27rem]  rounded-[1.2rem]">
                 <div className="flex items-center justify-between">
-                  <div className="text-[1.6rem] font-[600]">
+                  <div className="text-[1.6rem] font-[600] mb-[0.1rem]">
                     {content.username}
                   </div>
-                  <div className="text-[1.2rem] rounded-[1.2rem] mr-5 "></div>
+                  <div className="text-[1.2rem] rounded-[1.2rem] mr-5 text-[#8c8c91]">
+                    {hidden ? "12:40" : ""}
+                  </div>
                 </div>
                 <div className="text-[1.5rem] h-[2.25rem]">
                   Hello I'm {content.username}
