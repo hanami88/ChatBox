@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function LoginPage({ setLoading, setUser }) {
+function LoginPage({ setLoading, setUser, setUsers }) {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
@@ -23,6 +23,7 @@ function LoginPage({ setLoading, setUser }) {
       if (data.success) {
         setLoading(true);
         setUser(data.user);
+        setUsers(data.users);
         navigate("/");
       }
     } catch (err) {

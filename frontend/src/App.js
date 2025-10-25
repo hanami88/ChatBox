@@ -13,6 +13,7 @@ import PrivateRouter from "./components/PrivateRouter";
 
 function App() {
   const [user, setUser] = useState(false);
+  const [users, setUsers] = useState(false);
   const [loading, setLoading] = useState(null);
   useEffect(() => {
     fetch("http://localhost:8080/api/auth/xacnhandangnhap", {
@@ -23,6 +24,7 @@ function App() {
       .then((data) => {
         setLoading(data.success);
         setUser(data.user);
+        setUsers(data.users);
       });
   }, []);
   return (
@@ -35,7 +37,11 @@ function App() {
               user ? (
                 <Navigate to="/" />
               ) : (
-                <LoginPage setLoading={setLoading} setUser={setUser} />
+                <LoginPage
+                  setLoading={setLoading}
+                  setUser={setUser}
+                  setUsers={setUsers}
+                />
               )
             }
           ></Route>
@@ -46,7 +52,7 @@ function App() {
           <Route
             path="/"
             element={
-              <PrivateRouter user={user} loading={loading}>
+              <PrivateRouter user={user} loading={loading} users={users}>
                 <DefaultLayout>
                   <Messages />
                 </DefaultLayout>

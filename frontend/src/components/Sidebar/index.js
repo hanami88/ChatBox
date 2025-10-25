@@ -11,13 +11,22 @@ import {
   faGear,
   faUserGroup,
   faCircleHalfStroke,
+  faArrowLeft,
 } from "../../Icon";
+import BoxSidebar from "../BoxSidebar/index.js";
 function Sidebar() {
-  const { user } = useContext(UserContext);
+  const { user, users } = useContext(UserContext);
+  const [hidden, setHidden] = useState(true);
+  const friends = users.filter((user1) => user.friends.includes(user1._id));
   const [isOpen, setIsOpen] = useState(false);
+  const [boxSidebar, setBoxSidebar] = useState(friends);
   const checkOpen = () => {
     if (isOpen) setIsOpen(false);
     else setIsOpen(true);
+  };
+  const back = () => {
+    setBoxSidebar(friends);
+    setHidden(true);
   };
   return (
     <div className="w-[25vw] bg-[#212121] h-full text-[1.7rem] border-r-[1px] border-[#48484874]">
@@ -26,12 +35,14 @@ function Sidebar() {
           <div
             className={` ${
               isOpen ? "bg-[#2C2C2C]" : "bg-[#212121]"
-            } cursor-pointer relative h-[4rem] w-[4rem] flex justify-center items-center text-center rounded-[50%] hover:bg-[#2C2C2C]`}
+            } cursor-pointer relative h-[4rem] w-[4rem] flex justify-center items-center text-center rounded-[50%] hover:bg-[#2C2C2C] z-50`}
           >
             <FontAwesomeIcon
-              icon={faBars}
+              icon={hidden ? faBars : faArrowLeft}
               className="text-[2.2rem] text-[#ffffffaf] "
-              onClick={() => checkOpen()}
+              onClick={() => {
+                hidden ? checkOpen() : back();
+              }}
             />
             <div
               className={`${
@@ -47,7 +58,14 @@ function Sidebar() {
                 <div>{user.username}</div>
               </div>
               <div className="bg-[#FFFFFF1A] h-[0.1rem] w-full"></div>
-              <div className="flex items-center h-[3.2rem] py-[0.4rem] pr-[1.2rem] pl-[0.4rem] mx-[0.4rem] my-[0.4rem] hover:bg-[#00000066] rounded-[0.5rem]">
+              <div
+                onClick={() => {
+                  setBoxSidebar(users);
+                  setHidden(false);
+                  setIsOpen(false);
+                }}
+                className="flex items-center h-[3.2rem] py-[0.4rem] pr-[1.2rem] pl-[0.4rem] mx-[0.4rem] my-[0.4rem] hover:bg-[#00000066] rounded-[0.5rem]"
+              >
                 <FontAwesomeIcon
                   icon={faPlus}
                   className=" text-[1.6rem] text-[rgb(170,170,170)] ml-[0.7rem] mr-[2.2rem]"
@@ -122,20 +140,7 @@ function Sidebar() {
         </div>
       </div>
       <div className="w-[25vw] flex items-center text-white flex-col">
-        <div className="h-[7.2rem] w-[95%] rounded-[1.2rem] hover:bg-[rgb(44,44,44)] cursor-pointer flex items-center justify-between">
-          <img
-            src="snap.png"
-            alt="logo"
-            className="w-[5.4rem] h-[5.4rem] rounded-[1rem] ml-4"
-          />
-          <div className="w-[27rem] rounded-[1.2rem]">
-            <div className="flex items-center justify-between ">
-              <div className="text-[1.6rem] font-[600]">Snap Chat</div>
-              <div className="text-[1.2rem] rounded-[1.2rem] mr-5">13:26</div>
-            </div>
-            <div className="text-[1.5rem]">Telegram Web A Digest</div>
-          </div>
-        </div>
+        <BoxSidebar contents={boxSidebar} hidden={hidden} />
       </div>
     </div>
   );
