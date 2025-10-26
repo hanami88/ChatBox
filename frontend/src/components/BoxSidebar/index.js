@@ -4,7 +4,7 @@ import { UserContext } from "../../UserContext.js";
 import { SidebarContext } from "../../SidebarContext.js";
 function BoxSidebar({ contents, hidden }) {
   const { user } = useContext(UserContext);
-  const { setNav } = useContext(SidebarContext);
+  const { setNavMessage, setNav } = useContext(SidebarContext);
   const arrayCheckFriend = contents.map((friend) => {
     return user.friends.includes(friend._id);
   });
@@ -42,7 +42,6 @@ function BoxSidebar({ contents, hidden }) {
         alert(data.message);
       });
   };
-
   const [isFriend, setIsFriend] = useState(arrayCheckFriend);
   const handleAdd = (index) => {
     setIsFriend(
@@ -57,7 +56,10 @@ function BoxSidebar({ contents, hidden }) {
         return (
           content._id !== user._id && (
             <div
-              onClick={() => setNav(content)}
+              onClick={() => {
+                setNavMessage(content);
+                setNav(content);
+              }}
               key={index}
               className="relative h-[7.2rem] w-[95%] rounded-[1.2rem] hover:bg-[rgb(44,44,44)] cursor-pointer flex items-center justify-between"
             >

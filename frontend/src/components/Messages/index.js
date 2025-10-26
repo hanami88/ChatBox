@@ -1,55 +1,46 @@
 import { useEffect, useState, useContext, Fragment } from "react";
 import { UserContext } from "../../UserContext.js";
+import { SidebarContext } from "../../SidebarContext.js";
 function Messages() {
   const { user, socket } = useContext(UserContext);
-  const [chat, setChat] = useState([]);
+  const { setChat, chat } = useContext(SidebarContext);
   useEffect(() => {
-    fetch("http://localhost:8080/api/user/message", {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setChat(data);
-      });
-    socket.on("message", ({ user, message }) => {
+    socket.on("message", ({ user: sender, message }) => {
       const now = new Date();
       const hours = now.getHours().toString().padStart(2, "0");
       const minutes = now.getMinutes().toString().padStart(2, "0");
       const time = `${hours}:${minutes}`;
-      setChat((prev) => [...prev, { user, message, time }]);
+      setChat((prev) => [...prev, { sender, message, time }]);
     });
     return () => socket.disconnect();
   }, []);
   return (
     <Fragment>
-      {chat.map(({ user: sender, message, time }, index) => (
-        <div
-          key={index}
-          className={`flex mb-4 ${
-            user._id === sender._id ? "justify-end" : "justify-start"
-          }`}
-        >
+      {chat &&
+        chat.map(({ sender, message, time }, index) => (
           <div
-            className={`text-white text-[1.5rem] rounded-[1rem] px-4 py-2 max-w-[60%] leading-[2.1rem] flex
-              ${user._id === sender._id ? "bg-[#766AC8]" : "bg-[#212121]"}`}
+            key={index}
+            className={`flex mb-4 ${
+              user._id === sender._id ? "justify-end" : "justify-start"
+            }`}
           >
-            <div className="w-[90%] mr-5">{message}</div>
             <div
-              className={` text-[1.2rem] self-end mb-[-4px] ${
-                user._id === sender._id
-                  ? "text-[#FFFFFF88]"
-                  : "text-[#686C72BF]"
-              }`}
+              className={`text-white text-[1.5rem] rounded-[1rem] px-4 py-2 max-w-[60%] leading-[2.1rem] flex
+              ${user._id === sender._id ? "bg-[#766AC8]" : "bg-[#212121]"}`}
             >
-              {time}
+              <div className="w-[90%] mr-5">{message}</div>
+              <div
+                className={` text-[1.2rem] self-end mb-[-4px] ${
+                  user._id === sender._id
+                    ? "text-[#FFFFFF88]"
+                    : "text-[#686C72BF]"
+                }`}
+              >
+                {time}
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
     </Fragment>
   );
 }

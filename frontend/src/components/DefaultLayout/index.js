@@ -21,6 +21,36 @@ function DefaultLayout({ children }) {
   const [line, setLine] = useState(true);
   const [message, setMessage] = useState([]);
   const [nav, setNav] = useState(null);
+  const [chat, setChat] = useState(null);
+  const setNavMessage = (receiver) => {
+    fetch("http://localhost:8080/api/user/message", {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ user, receiver }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.message) {
+          const fixChat = data.message.map((msg) => {
+            const date = new Date(msg.createdAt);
+            const hours = date.getHours().toString().padStart(2, "0");
+            const minutes = date.getMinutes().toString().padStart(2, "0");
+            const time1 = `${hours}:${minutes}`;
+            return {
+              sender: msg.sender,
+              message: msg.content,
+              time: time1,
+            };
+          });
+          setChat(fixChat);
+        } else {
+          setChat([]);
+        }
+      });
+  };
   const sendMessage = () => {
     socket.emit("message", { user, receiver: nav, message });
     setMessage("");
@@ -36,7 +66,7 @@ function DefaultLayout({ children }) {
     } else setLine(() => true);
   };
   return (
-    <SidebarContext.Provider value={{ setNav }}>
+    <SidebarContext.Provider value={{ setChat, setNavMessage, setNav, chat }}>
       <div className="DefaultLayout h-screen w-full flex  bg-[length:100%_100%] bg-center relative">
         <Sidebar />
         <img
