@@ -1,8 +1,21 @@
 import { Fragment } from "react/jsx-runtime";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../UserContext.js";
+import { SidebarContext } from "../../SidebarContext.js";
 function BoxSidebar({ contents, hidden }) {
   const { user } = useContext(UserContext);
+  const { setNav } = useContext(SidebarContext);
+  const arrayCheckFriend = contents.map((friend) => {
+    return user.friends.includes(friend._id);
+  });
+  useEffect(() => {
+    if (user && contents.length > 0) {
+      const arrayCheckFriend = contents.map((friend) =>
+        user.friends.includes(friend._id)
+      );
+      setIsFriend(arrayCheckFriend);
+    }
+  }, [contents]);
   const addFriend = (friend) => {
     fetch("http://localhost:8080/api/user/themban", {
       method: "POST",
@@ -29,9 +42,7 @@ function BoxSidebar({ contents, hidden }) {
         alert(data.message);
       });
   };
-  const arrayCheckFriend = contents.map((friend) => {
-    return user.friends.includes(friend._id);
-  });
+
   const [isFriend, setIsFriend] = useState(arrayCheckFriend);
   const handleAdd = (index) => {
     setIsFriend(
@@ -42,11 +53,11 @@ function BoxSidebar({ contents, hidden }) {
   };
   return (
     <Fragment>
-      {contents.map(
-        (content, index) =>
+      {contents.map((content, index) => {
+        return (
           content._id !== user._id && (
             <div
-              onClick={}
+              onClick={() => setNav(content)}
               key={index}
               className="relative h-[7.2rem] w-[95%] rounded-[1.2rem] hover:bg-[rgb(44,44,44)] cursor-pointer flex items-center justify-between"
             >
@@ -83,7 +94,8 @@ function BoxSidebar({ contents, hidden }) {
               </div>
             </div>
           )
-      )}
+        );
+      })}
     </Fragment>
   );
 }

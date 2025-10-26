@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
 import { UserContext } from "../../UserContext.js";
-function PrivateRouter({ children, user, loading, users }) {
+function PrivateRouter({ children, user, loading, users, socket }) {
   if (loading === null) {
     return (
       <div className="flex justify-center items-center w-full h-screen">
@@ -12,7 +12,7 @@ function PrivateRouter({ children, user, loading, users }) {
     return <Navigate to="/login-page" />;
   }
   return (
-    <UserContext.Provider value={{ user, loading, users }}>
+    <UserContext.Provider value={{ user, loading, users, socket }}>
       {children}
     </UserContext.Provider>
   );

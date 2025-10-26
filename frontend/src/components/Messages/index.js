@@ -1,14 +1,15 @@
 import { useEffect, useState, useContext, Fragment } from "react";
-import socketConnect from "../../services/Socket";
 import { UserContext } from "../../UserContext.js";
 function Messages() {
-  const { user } = useContext(UserContext);
+  const { user, socket } = useContext(UserContext);
   const [chat, setChat] = useState([]);
   useEffect(() => {
-    const socket = socketConnect(user);
     fetch("http://localhost:8080/api/user/message", {
-      method: "GET",
+      method: "POST",
       credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
     })
       .then((res) => res.json())
       .then((data) => {
@@ -29,17 +30,17 @@ function Messages() {
         <div
           key={index}
           className={`flex mb-4 ${
-            user._id !== sender._id ? "justify-end" : "justify-start"
+            user._id === sender._id ? "justify-end" : "justify-start"
           }`}
         >
           <div
             className={`text-white text-[1.5rem] rounded-[1rem] px-4 py-2 max-w-[60%] leading-[2.1rem] flex
-              ${user._id !== sender._id ? "bg-[#766AC8]" : "bg-[#212121]"}`}
+              ${user._id === sender._id ? "bg-[#766AC8]" : "bg-[#212121]"}`}
           >
             <div className="w-[90%] mr-5">{message}</div>
             <div
               className={` text-[1.2rem] self-end mb-[-4px] ${
-                user._id !== sender._id
+                user._id === sender._id
                   ? "text-[#FFFFFF88]"
                   : "text-[#686C72BF]"
               }`}

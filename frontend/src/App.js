@@ -10,11 +10,15 @@ import {
 } from "react-router-dom";
 import { useState, useEffect } from "react";
 import PrivateRouter from "./components/PrivateRouter";
-
+import socketConnect from "./services/Socket";
 function App() {
   const [user, setUser] = useState(false);
   const [users, setUsers] = useState(false);
   const [loading, setLoading] = useState(null);
+  let socket;
+  if (user) {
+    socket = socketConnect(user);
+  }
   useEffect(() => {
     fetch("http://localhost:8080/api/auth/xacnhandangnhap", {
       method: "GET",
@@ -52,7 +56,12 @@ function App() {
           <Route
             path="/"
             element={
-              <PrivateRouter user={user} loading={loading} users={users}>
+              <PrivateRouter
+                user={user}
+                loading={loading}
+                users={users}
+                socket={socket}
+              >
                 <DefaultLayout>
                   <Messages />
                 </DefaultLayout>

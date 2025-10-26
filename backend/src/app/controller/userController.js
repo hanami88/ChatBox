@@ -1,15 +1,14 @@
 import User from "../models/User.js";
 import Message from "../models/Message.js";
+import Room from "../models/Room.js";
 class userController {
   chat(req, res) {
     res.send("ok");
   }
   message(req, res) {
-    const messages = Message.findBy;
+    const messages = Message.find({});
   }
-  users(req, res) {
-    const messages = Message.findBy;
-  }
+
   async themban(req, res) {
     try {
       const { userid, friendid } = req.body;
