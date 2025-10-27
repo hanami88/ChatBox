@@ -51,9 +51,9 @@ function Sidebar() {
             >
               <div className="flex items-center h-[3.2rem] py-[0.4rem] pr-[1.2rem] pl-[0.4rem] mx-[0.4rem] mt-[0.6rem] mb-[0.4rem] hover:bg-[#00000066] rounded-[0.5rem] ">
                 <img
-                  src="logo.png"
+                  src={user.avatar}
                   alt=""
-                  className="w-[2.4rem] h-[2.4rem] ml-[0.5rem] mr-[2rem]"
+                  className="w-[2.4rem] h-[2.4rem] ml-[0.5rem] mr-[2rem] rounded-[0.75rem]"
                 />
                 <div>{user.username}</div>
               </div>

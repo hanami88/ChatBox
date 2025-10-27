@@ -24,11 +24,13 @@ const setupSocket = (server) => {
           members: [user._id, receiver._id],
         });
       }
-      Message.create({
+      const presentmessage = await Message.create({
         sender: user,
         roomId: room._id,
         content: message,
       });
+      room.lastMessage = presentmessage._id;
+      await room.save();
       // Gửi lại cho tất cả client, kèm theo thông tin người gửi
       const receiverSocket = users[receiver._id];
       if (receiverSocket) {

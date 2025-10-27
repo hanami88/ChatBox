@@ -80,11 +80,11 @@ function DefaultLayout({ children }) {
           } w-[75vw] flex items-center flex-col`}
         >
           <div className="fixed top-0 right-0 w-[75vw] h-[5.6rem] bg-[#212121] shadowname flex justify-between items-center ">
-            <div className="flex items-center ml-[2vw] w-[14.3rem] justify-between">
+            <div className="flex items-center ml-[2vw] w-[14.3rem] ">
               <img
                 src={nav && nav.avatar}
                 alt="anh"
-                className="rounded-[1rem] h-[4.5rem] w-[4.5rem]"
+                className="rounded-[1rem] h-[4.5rem] w-[4.5rem] mr-4"
               />
               <div>
                 <div className="text-[1.7rem] text-white font-[600]">

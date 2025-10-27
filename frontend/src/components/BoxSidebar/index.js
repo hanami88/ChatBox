@@ -64,7 +64,7 @@ function BoxSidebar({ contents, hidden }) {
               className="relative h-[7.2rem] w-[95%] rounded-[1.2rem] hover:bg-[rgb(44,44,44)] cursor-pointer flex items-center justify-between"
             >
               <img
-                src="snap.png"
+                src={content.avatar}
                 alt="logo"
                 className="w-[5.4rem] h-[5.4rem] rounded-[1rem] ml-4"
               />
