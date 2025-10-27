@@ -3,7 +3,7 @@ import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../UserContext.js";
 import { SidebarContext } from "../../SidebarContext.js";
 function BoxSidebar({ contents, hidden }) {
-  const { user } = useContext(UserContext);
+  const { user, rooms } = useContext(UserContext);
   const { setNavMessage, setNav } = useContext(SidebarContext);
   const arrayCheckFriend = contents.map((friend) => {
     return user.friends.includes(friend._id);
@@ -77,8 +77,16 @@ function BoxSidebar({ contents, hidden }) {
                     {hidden ? "12:40" : ""}
                   </div>
                 </div>
-                <div className="text-[1.5rem] h-[2.25rem]">
-                  Hello I'm {content.username}
+                <div className="text-[1.5rem] h-[2.25rem] w-[27rem] overflow-hidden text-ellipsis whitespace-nowrap">
+                  {(rooms &&
+                    rooms.find((room) => {
+                      const memberIds = room.members.map((m) => m.toString());
+                      return (
+                        memberIds.includes(user._id) &&
+                        memberIds.includes(content._id)
+                      );
+                    })?.lastMessage?.content) ||
+                    ""}
                 </div>
               </div>
               <div

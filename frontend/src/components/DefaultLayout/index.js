@@ -66,7 +66,14 @@ function DefaultLayout({ children }) {
     } else setLine(() => true);
   };
   return (
-    <SidebarContext.Provider value={{ setChat, setNavMessage, setNav, chat }}>
+    <SidebarContext.Provider
+      value={{
+        setChat,
+        setNavMessage,
+        setNav,
+        chat,
+      }}
+    >
       <div className="DefaultLayout h-screen w-full flex  bg-[length:100%_100%] bg-center relative">
         <Sidebar />
         <img

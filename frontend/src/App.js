@@ -15,6 +15,22 @@ function App() {
   const [user, setUser] = useState(false);
   const [users, setUsers] = useState(false);
   const [loading, setLoading] = useState(null);
+  const [rooms, setRooms] = useState([]);
+  const changeMessageRoom = (roomId, message) => {
+    setRooms((prev) =>
+      prev.map((room) =>
+        room._id === roomId
+          ? {
+              ...room,
+              lastMessage: {
+                ...room.lastMessage,
+                content: message,
+              },
+            }
+          : room
+      )
+    );
+  };
   let socket;
   if (user) {
     socket = socketConnect(user);
@@ -29,6 +45,7 @@ function App() {
         setLoading(data.success);
         setUser(data.user);
         setUsers(data.users);
+        setRooms(data.rooms);
       });
   }, []);
   return (
@@ -45,6 +62,7 @@ function App() {
                   setLoading={setLoading}
                   setUser={setUser}
                   setUsers={setUsers}
+                  setRooms={setRooms}
                 />
               )
             }
@@ -61,6 +79,8 @@ function App() {
                 loading={loading}
                 users={users}
                 socket={socket}
+                rooms={rooms}
+                changeMessageRoom={changeMessageRoom}
               >
                 <DefaultLayout>
                   <Messages />

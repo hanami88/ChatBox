@@ -1,6 +1,14 @@
 import { Navigate } from "react-router-dom";
 import { UserContext } from "../../UserContext.js";
-function PrivateRouter({ children, user, loading, users, socket }) {
+function PrivateRouter({
+  children,
+  user,
+  loading,
+  users,
+  socket,
+  changeMessageRoom,
+  rooms,
+}) {
   if (loading === null) {
     return (
       <div className="flex justify-center items-center w-full h-screen">
@@ -12,7 +20,9 @@ function PrivateRouter({ children, user, loading, users, socket }) {
     return <Navigate to="/login-page" />;
   }
   return (
-    <UserContext.Provider value={{ user, loading, users, socket }}>
+    <UserContext.Provider
+      value={{ user, loading, users, socket, rooms, changeMessageRoom }}
+    >
       {children}
     </UserContext.Provider>
   );

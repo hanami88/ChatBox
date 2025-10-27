@@ -1,4 +1,5 @@
 import User from "../models/User.js";
+import Room from "../models/Room.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
@@ -42,6 +43,9 @@ class authController {
     const { username, password } = req.body;
     const user = await User.findOne({ username });
     const users = await User.find();
+    const rooms = await Room.find({
+      members: { $in: [user._id] },
+    }).populate("lastMessage");
     if (!user) {
       return res
         .status(400)
@@ -65,18 +69,22 @@ class authController {
       message: "Đăng nhập thành công",
       user: user,
       users: users,
+      rooms: rooms,
     });
   }
   async xacnhandangnhap(req, res) {
     const user = await User.findById(req.id);
     const users = await User.find();
-    console.log(users);
-    console.log(user);
+    const rooms = await Room.find({
+      members: { $in: [user._id] },
+    }).populate("lastMessage");
+    console.log(rooms);
     res.status(200).json({
       success: true,
       message: "Đã đăng nhập",
       user: user,
       users: users,
+      rooms: rooms,
     });
   }
 }
