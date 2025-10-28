@@ -1,17 +1,3 @@
-<h1 align="center">✨ 友コネクト — Yuu Connect ✨</h1>
-
-<p align="center">
-  <em>"Kết nối bạn bè – Gắn kết cảm xúc"</em>  
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Socket.IO-Real%20Time-010101?style=flat&logo=socketdotio&logoColor=white">
-  <img src="https://img.shields.io/badge/MongoDB-Database-4EA94B?style=flat&logo=mongodb&logoColor=white">
-  <img src="https://img.shields.io/badge/Express.js-Backend-000000?style=flat&logo=express&logoColor=white">
-  <img src="https://img.shields.io/badge/React-Frontend-61DAFB?style=flat&logo=react&logoColor=black">
-  <img src="https://img.shields.io/badge/Node.js-Server-43853D?style=flat&logo=node.js&logoColor=white">
-</p>
-
 ---<h1 align="center">✨ 友コネクト — Yuu Connect ✨</h1>
 
 <p align="center">
