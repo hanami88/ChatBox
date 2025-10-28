@@ -9,7 +9,115 @@
   <img src="https://img.shields.io/badge/MongoDB-Database-4EA94B?style=flat&logo=mongodb&logoColor=white">
   <img src="https://img.shields.io/badge/Express.js-Backend-000000?style=flat&logo=express&logoColor=white">
   <img src="https://img.shields.io/badge/React-Frontend-61DAFB?style=flat&logo=react&logoColor=black">
-  <img 
+  <img src="https://img.shields.io/badge/Node.js-Server-43853D?style=flat&logo=node.js&logoColor=white">
+</p>
+
+---<h1 align="center">✨ 友コネクト — Yuu Connect ✨</h1>
+
+<p align="center">
+  <em>"友情のつながり、心の結びつき"</em>  
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Socket.IO-Real%20Time-010101?style=flat&logo=socketdotio&logoColor=white">
+  <img src="https://img.shields.io/badge/MongoDB-Database-4EA94B?style=flat&logo=mongodb&logoColor=white">
+  <img src="https://img.shields.io/badge/Express.js-Backend-000000?style=flat&logo=express&logoColor=white">
+  <img src="https://img.shields.io/badge/React-Frontend-61DAFB?style=flat&logo=react&logoColor=black">
+  <img src="https://img.shields.io/badge/Node.js-Server-43853D?style=flat&logo=node.js&logoColor=white">
+</p>
+
+---
+
+## 💬 Project Overview
+
+**Yuu Connect (友コネクト)** is a modern **real-time chat platform** inspired by Telegram —  
+fast, elegant, and built entirely with **Socket.IO** for seamless real-time interaction.
+
+It’s not just a chatbox — it’s a **social experience** where you can connect, chat, and share emotions instantly.  
+With a fully dynamic backend and a polished frontend, Yuu Connect brings conversations to life.
+
+---
+
+## 🚀 Core Features
+
+- 🧑‍🤝‍🧑 **Add & Accept Friends** — Send and approve friend requests easily.  
+- 💬 **Real-Time Messaging** — Built with Socket.IO for instant message delivery.  
+- 🕒 **Live Message Updates** — See the latest messages and timestamps instantly.  
+- ⚡ **Dynamic User Status** — Online/offline indicators and typing status in real time.  
+- 🔒 **Secure Authentication** — JWT + cookies to protect user sessions.  
+- 🎨 **Modern UI** — Clean and intuitive design inspired by Telegram’s simplicity.  
+
+---
+
+## ⚙️ Tech Stack
+
+### 🧩 Frontend
+- ⚡ **React.js + Tailwind CSS** — Fast, responsive, and beautifully minimal UI.  
+- 🔁 **React Hooks + Context API** — Simplified and efficient state management.  
+- 💫 **Socket.IO Client** — Real-time connection to the chat server.  
+
+### 🖥️ Backend
+- 🚀 **Node.js + Express.js** — RESTful APIs and flexible routing.  
+- 💬 **Socket.IO Server** — Handles all real-time message transmission.  
+- 🔐 **JWT Authentication** — Safe login and session management.  
+- 🧠 **MongoDB + Mongoose** — Stores users, rooms, and messages efficiently.  
+
+---
+
+## 🧠 Architecture Overview
+
+Client (React)
+│
+├──> REST API (Express)
+│ └──> MongoDB (Data Storage)
+│
+└──> Socket.IO (Real-Time Communication)
+
+## 🌟 Key Highlights
+
+| Feature | Description |
+|----------|-------------|
+| 🗨️ Real-Time Chat | Instant two-way communication powered by Socket.IO |
+| 👥 Friend System | Add, accept, and manage friends easily |
+| 🧑‍💻 Live User Status | Displays who’s online and who’s typing |
+| 📨 Last Message Preview | Each room dynamically shows its latest message |
+| 🧭 Sleek UI | Inspired by Telegram’s elegant and responsive design |
+| 🔒 Authentication | JWT + cookie-based user login system |
+
+---
+
+## 🖼️ Demo Preview
+
+<p align="center">
+  <img src="https://github.com/yourusername/yourrepo/assets/demo-chatbox.gif" width="700"/>
+  <br/>
+  <em>✨ Real-time chat. Clean design. Smooth experience. ✨</em>
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # Getting Started with Create React App
