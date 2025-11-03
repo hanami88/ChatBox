@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useContext } from "react";
 import { UserContext } from "../../UserContext.js";
+import { SidebarContext } from "../../SidebarContext";
+
 import {
   faBars,
   FontAwesomeIcon,
@@ -16,6 +18,7 @@ import {
 import BoxSidebar from "../BoxSidebar/index.js";
 function Sidebar() {
   const { user, users } = useContext(UserContext);
+  const { setShowProfile } = useContext(SidebarContext);
   const [hidden, setHidden] = useState(true);
   const friends = users.filter((user1) => user.friends.includes(user1._id));
   const [isOpen, setIsOpen] = useState(false);
@@ -73,7 +76,13 @@ function Sidebar() {
                 <div>アカウントを追加</div>
               </div>
               <div className="bg-[#FFFFFF1A] h-[0.1rem] w-full"></div>
-              <div className="flex items-center h-[3.2rem] py-[0.4rem] pr-[1.2rem] pl-[0.4rem] mx-[0.4rem] my-[0.4rem] hover:bg-[#00000066] rounded-[0.5rem]">
+              <div
+                onClick={() => {
+                  setShowProfile(true);
+                  setIsOpen(false);
+                }}
+                className=" flex items-center h-[3.2rem] py-[0.4rem] pr-[1.2rem] pl-[0.4rem] mx-[0.4rem] my-[0.4rem] hover:bg-[#00000066] rounded-[0.5rem]"
+              >
                 <FontAwesomeIcon
                   icon={faUser}
                   className=" text-[1.6rem] text-[rgb(170,170,170)] ml-[0.7rem] mr-[2.2rem]"

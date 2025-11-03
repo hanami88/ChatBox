@@ -15,6 +15,8 @@ import {
   faUserGroup,
   faCircleHalfStroke,
   faArrowLeft,
+  faXmark,
+  faPencil,
 } from "@fortawesome/free-solid-svg-icons";
 import { faFaceSmile } from "@fortawesome/free-regular-svg-icons";
 export {
@@ -35,4 +37,6 @@ export {
   faUserGroup,
   faCircleHalfStroke,
   faArrowLeft,
+  faXmark,
+  faPencil,
 };

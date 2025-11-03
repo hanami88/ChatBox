@@ -1,4 +1,5 @@
 import Sidebar from "../Sidebar";
+import Profile from "../Profile";
 import {
   faFaceSmile,
   faBars,
@@ -22,6 +23,7 @@ function DefaultLayout({ children }) {
   const [message, setMessage] = useState([]);
   const [nav, setNav] = useState(null);
   const [chat, setChat] = useState(null);
+  const [showProfile, setShowProfile] = useState(false);
   const setNavMessage = (receiver) => {
     fetch("http://localhost:8080/api/user/message", {
       method: "POST",
@@ -72,9 +74,10 @@ function DefaultLayout({ children }) {
         setNavMessage,
         setNav,
         chat,
+        setShowProfile,
       }}
     >
-      <div className="DefaultLayout h-screen w-full flex  bg-[length:100%_100%] bg-center relative">
+      <div className="DefaultLayout h-screen w-full flex  bg-[length:100%] bg-center relative">
         <Sidebar />
         <img
           src="_.jpeg"
@@ -82,11 +85,15 @@ function DefaultLayout({ children }) {
           className="w-[75vw] h-full absolute left-[25vw] z-[-1]"
         />
         <div
-          className={`${
-            nav ? "" : "hidden"
-          } w-[75vw] flex items-center flex-col`}
+          className={`${nav ? "" : "hidden"}  flex items-center flex-col ${
+            showProfile ? " w-[50vw]" : "w-[75vw] "
+          }`}
         >
-          <div className="fixed top-0 right-0 w-[75vw] h-[5.6rem] bg-[#212121] shadowname flex justify-between items-center ">
+          <div
+            className={`${
+              showProfile ? " w-[50vw]" : "w-[75vw] "
+            }  fixed top-0 left-[25vw]  h-[5.6rem] bg-[#212121] shadowname flex justify-between items-center `}
+          >
             <div className="flex items-center ml-[2vw] w-[14.3rem] ">
               <img
                 src={nav && nav.avatar}
@@ -123,14 +130,14 @@ function DefaultLayout({ children }) {
             className="w-[75vw] h-[88vh] pt-[7rem] flex justify-center mb-1 overflow-y-auto scrollbar-transparent"
             onScroll={(e) => checkLine(e.target.scrollTop)}
           >
-            <div className="w-[50vw] ml-3">{children}</div>
+            <div className="w-[45vw] ml-3">{children}</div>
           </div>
           <div
-            className={`h-[1px] w-[50vw] mb-5 ${
+            className={`h-[1px] w-[45vw] mb-5 ${
               line ? "bg-white line" : "bg-[#00000000]"
             }`}
           ></div>
-          <div className="w-[50vw] flex justify-center ">
+          <div className={`w-[45vw]  flex justify-center `}>
             <div className="flex relative w-full">
               <div className="w-[2.4rem] h-[2.4rem] absolute top-[12px] left-[13px] bg-[rgb(135,116,225)] rounded-[0.75rem] flex items-center justify-center ">
                 <FontAwesomeIcon
@@ -161,7 +168,7 @@ function DefaultLayout({ children }) {
                 icon={faPaperclip}
                 className="text-[2.2rem] text-[#7c7c7c] absolute top-[14px] right-[73px] cursor-pointer hover:text-[rgb(135,116,225)]"
               />
-              <div className="group h-[4.8rem] w-[4.8rem] rounded-full flex justify-center items-center bg-[#212121] ml-5 cursor-pointer hover:text-white hover:bg-[rgb(135,116,225)]">
+              <div className="group h-[4.8rem] w-[4.8rem] rounded-full flex justify-center items-center bg-[#212121] ml-2 cursor-pointer hover:text-white hover:bg-[rgb(135,116,225)]">
                 <FontAwesomeIcon
                   icon={check ? faPaperPlane : faMicrophone}
                   onClick={
@@ -180,6 +187,7 @@ function DefaultLayout({ children }) {
             </div>
           </div>
         </div>
+        {showProfile && <Profile />}
       </div>
     </SidebarContext.Provider>
   );
