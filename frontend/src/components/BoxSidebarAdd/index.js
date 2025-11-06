@@ -5,6 +5,7 @@ import { SidebarContext } from "../../SidebarContext.js";
 function BoxSidebar({ contents, hidden }) {
   const { user, rooms } = useContext(UserContext);
   const { setNavMessage, setNav } = useContext(SidebarContext);
+
   const arrayCheckFriend = contents.map((friend) => {
     return user.friends.includes(friend._id);
   });
@@ -43,6 +44,7 @@ function BoxSidebar({ contents, hidden }) {
       });
   };
   const [isFriend, setIsFriend] = useState(arrayCheckFriend);
+  const [selectedDiv, setSelectedDiv] = useState(null);
   const handleAdd = (index) => {
     setIsFriend(
       isFriend.map((friend, index1) => {
@@ -59,9 +61,15 @@ function BoxSidebar({ contents, hidden }) {
               onClick={() => {
                 setNavMessage(content);
                 setNav(content);
+                setSelectedDiv(content._id);
               }}
               key={index}
-              className="relative h-[7.2rem] w-[95%] rounded-[1.2rem] hover:bg-[rgb(44,44,44)] cursor-pointer flex items-center justify-between"
+              className={`relative h-[7.2rem] w-[95%] rounded-[1.2rem] cursor-pointer flex items-center justify-between
+    ${
+      selectedDiv === content._id
+        ? "dark:bg-[rgb(118,106,200,1)] bg-[#71d446]" // ✅ màu khi được chọn
+        : "dark:hover:bg-[rgb(44,44,44)] hover:bg-[rgb(244,244,245)]" // ✅ màu khi hover
+    }`}
             >
               <img
                 src={content.avatar}
@@ -70,14 +78,32 @@ function BoxSidebar({ contents, hidden }) {
               />
               <div className="w-[27rem]  rounded-[1.2rem]">
                 <div className="flex items-center justify-between">
-                  <div className="text-[1.6rem] font-[600] mb-[0.1rem]">
+                  <div
+                    className={`text-[1.6rem] font-[600] mb-[0.1rem]  ${
+                      selectedDiv === content._id
+                        ? "text-[white] " // ✅ màu khi được chọn
+                        : "dark:text-[white] text-[black]"
+                    }`}
+                  >
                     {content.username}
                   </div>
-                  <div className="text-[1.2rem] rounded-[1.2rem] mr-5 text-[#8c8c91]">
+                  <div
+                    className={`text-[1.2rem] rounded-[1.2rem] mr-5 ${
+                      selectedDiv === content._id
+                        ? "text-[white] " // ✅ màu khi được chọn
+                        : "dark:text-[#8C8C8C91] text-[rgb(142,142,146)]"
+                    }`}
+                  >
                     {hidden ? "12:40" : ""}
                   </div>
                 </div>
-                <div className="text-[1.5rem] h-[2.25rem] w-[27rem] overflow-hidden text-ellipsis whitespace-nowrap">
+                <div
+                  className={`text-[1.5rem] h-[2.25rem] w-[27rem] overflow-hidden text-ellipsis whitespace-nowrap ${
+                    selectedDiv === content._id
+                      ? "dark:text-[white]"
+                      : "dark:text-[rgb(170,170,170)] text-[rgb(142,142,146)]"
+                  }`}
+                >
                   {(rooms &&
                     rooms.find((room) => {
                       const memberIds = room.members.map((m) => m.toString());

@@ -27,13 +27,25 @@ function Messages() {
           >
             <div
               className={`text-white text-[1.5rem] rounded-[1rem] px-4 py-2 max-w-[60%] leading-[2.1rem] flex
-              ${user._id === sender._id ? "bg-[#766AC8]" : "bg-[#212121]"}`}
+              ${
+                user._id === sender._id
+                  ? "dark:bg-[#766AC8] bg-[#dcf8c5]"
+                  : "dark:bg-[#212121] bg-white"
+              }`}
             >
-              <div className="w-[90%] mr-5 break-words">{message}</div>
+              <div
+                className={`w-[90%] mr-5 break-words ${
+                  user._id === sender._id
+                    ? "dark:text-[white] text-black"
+                    : "text-[#212121] dark:text-white"
+                }`}
+              >
+                {message}
+              </div>
               <div
                 className={` text-[1.2rem] self-end mb-[-4px] ${
                   user._id === sender._id
-                    ? "text-[#FFFFFF88]"
+                    ? "dark:text-[#FFFFFF88] text-[#4fae4e]"
                     : "text-[#686C72BF]"
                 }`}
               >
