@@ -41,12 +41,11 @@ function DefaultLayout({ children }) {
         return `オンライン`;
       }
       return `${diffMinutes} 分前にオンライン`;
+    } else if (diffHours < 24) {
+      return `${diffHours} 時前オンライン`;
+    } else {
+      return `${diffDays} 日前オンライン`;
     }
-     else if (diffHours<24) {
-       return `${diffHours} 時前オンライン`;
-     } else {
-       return `${diffDays} 日前オンライン`;
-     }
   };
   const setNavMessage = (receiver) => {
     fetch("http://localhost:8080/api/user/message", {
@@ -61,10 +60,31 @@ function DefaultLayout({ children }) {
       .then((data) => {
         if (data.message) {
           const fixChat = data.message.map((msg) => {
+            const weekdays = [
+              "Chủ Nhật",
+              "Thứ Hai",
+              "Thứ Ba",
+              "Thứ Tư",
+              "Thứ Năm",
+              "Thứ Sáu",
+              "Thứ Bảy",
+            ];
             const date = new Date(msg.createdAt);
+            const now = new Date();
             const hours = date.getHours().toString().padStart(2, "0");
             const minutes = date.getMinutes().toString().padStart(2, "0");
-            const time1 = `${hours}:${minutes}`;
+            const days = date.getDate().toString().padStart(2, "0");
+            const dayName = weekdays[date.getDay()];
+            const months = (date.getMonth() + 1).toString().padStart(2, "0");
+            const years = date.getFullYear();
+            let time1 = null;
+            if (now.getDate() - date.getDate() > 7) {
+              time1 = `${hours}:${minutes} ${days}/${months}/${years}`;
+            } else if (now.getDate() - date.getDate() == 0) {
+              time1 = `${hours}:${minutes}`;
+            } else {
+              time1 = `${hours}:${minutes} ${dayName}`;
+            }
             return {
               sender: msg.sender,
               message: msg.content,
