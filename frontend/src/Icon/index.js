@@ -17,6 +17,7 @@ import {
   faArrowLeft,
   faXmark,
   faPencil,
+  faArrowRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
 import { faFaceSmile } from "@fortawesome/free-regular-svg-icons";
 export {
@@ -39,4 +40,5 @@ export {
   faArrowLeft,
   faXmark,
   faPencil,
+  faArrowRightFromBracket,
 };

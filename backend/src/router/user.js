@@ -6,5 +6,6 @@ const router = epxress.Router();
 router.post("/message", user.message);
 router.post("/themban", user.themban);
 router.post("/xoaban", user.xoaban);
+router.get("/timkiem", user.timkiem);
 
 export default router;

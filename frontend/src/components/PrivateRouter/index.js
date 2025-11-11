@@ -8,6 +8,7 @@ function PrivateRouter({
   socket,
   changeMessageRoom,
   rooms,
+  setRooms,
 }) {
   if (loading === null) {
     return (
@@ -21,7 +22,15 @@ function PrivateRouter({
   }
   return (
     <UserContext.Provider
-      value={{ user, loading, users, socket, rooms, changeMessageRoom }}
+      value={{
+        user,
+        setRooms,
+        loading,
+        users,
+        socket,
+        rooms,
+        changeMessageRoom,
+      }}
     >
       {children}
     </UserContext.Provider>

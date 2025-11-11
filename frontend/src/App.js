@@ -25,6 +25,7 @@ function App() {
               lastMessage: {
                 ...room.lastMessage,
                 content: message,
+                createdAt: new Date(),
               },
             }
           : room
@@ -80,6 +81,7 @@ function App() {
                 users={users}
                 socket={socket}
                 rooms={rooms}
+                setRooms={setRooms}
                 changeMessageRoom={changeMessageRoom}
               >
                 <DefaultLayout>

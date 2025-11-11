@@ -12,7 +12,7 @@ import {
   faPhone,
   faPaperPlane,
 } from "../../Icon";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useContext } from "react";
 import { UserContext } from "../../UserContext.js";
 import { SidebarContext } from "../../SidebarContext.js";
@@ -20,10 +20,34 @@ function DefaultLayout({ children }) {
   const { user, socket } = useContext(UserContext);
   const [check, setCheck] = useState(false);
   const [line, setLine] = useState(true);
-  const [message, setMessage] = useState([]);
+  const [message, setMessage] = useState("");
   const [nav, setNav] = useState(null);
   const [chat, setChat] = useState(null);
   const [showProfile, setShowProfile] = useState(false);
+  const chatRef = useRef(null);
+  useEffect(() => {
+    if (chatRef.current) {
+      chatRef.current.scrollTop = chatRef.current.scrollHeight;
+    }
+  }, [chat]);
+  const timeAgoSimple = (lastTime) => {
+    const now = new Date();
+    const diffMs = now - new Date(lastTime);
+    const diffMinutes = Math.floor(diffMs / (1000 * 60));
+    const diffHours = Math.floor(diffMinutes / 60);
+    const diffDays = Math.floor(diffHours / 24);
+    if (diffMinutes < 60) {
+      if (diffMinutes < 1) {
+        return `オンライン`;
+      }
+      return `${diffMinutes} 分前にオンライン`;
+    }
+     else if (diffHours<24) {
+       return `${diffHours} 時前オンライン`;
+     } else {
+       return `${diffDays} 日前オンライン`;
+     }
+  };
   const setNavMessage = (receiver) => {
     fetch("http://localhost:8080/api/user/message", {
       method: "POST",
@@ -80,12 +104,12 @@ function DefaultLayout({ children }) {
       <div className="DefaultLayout h-screen w-full flex  bg-[length:100%] bg-center relative">
         <Sidebar />
         <img
-          src="bg4.jpeg"
+          src="bg1.jpeg"
           alt=""
           className="w-[75vw] dark:hidden  h-full absolute left-[25vw] z-[-1]"
         />
         <img
-          src="bg5.jpeg"
+          src="bg2.jpeg"
           alt=""
           className="w-[75vw]  dark:block hidden h-full absolute left-[25vw] z-[-1]"
         />
@@ -99,18 +123,20 @@ function DefaultLayout({ children }) {
               showProfile ? " w-[50vw]" : "w-[75vw] "
             }  fixed top-0 left-[25vw]  h-[5.6rem] dark:bg-[#212121] bg-[white] shadowname flex justify-between items-center `}
           >
-            <div className="flex items-center ml-[2vw] w-[14.3rem] ">
+            <div className="flex items-center ml-[2vw] w-[30rem] ">
               <img
                 src={nav && nav.avatar}
                 alt="anh"
                 className="rounded-[1rem] h-[4.5rem] w-[4.5rem] mr-4"
               />
               <div>
-                <div className="text-[1.7rem] dark:text-white text-black hite font-[600]">
-                  {nav && nav.username}
+                <div className="text-[1.7rem] dark:text-white text-black   font-[600]">
+                  {nav && nav.name}
                 </div>
                 <div className="text-[1.4rem] dark:text-[#AAAAAA] text-[rgb(142,142,146)] mt-[-0.3rem]">
-                  オンライン
+                  {nav?.onlineStatus
+                    ? "オンライン"
+                    : timeAgoSimple(nav?.lastOnline)}
                 </div>
               </div>
             </div>
@@ -132,10 +158,11 @@ function DefaultLayout({ children }) {
             </div>
           </div>
           <div
-            className="w-[75vw] h-[88vh] pt-[7rem] flex justify-center mb-1 overflow-y-auto scrollbar-transparent"
+            ref={chatRef}
+            className="w-[75vw] h-[88vh] pt-[7rem] flex justify-center items-start mb-1 overflow-y-auto scrollbar-transparent"
             onScroll={(e) => checkLine(e.target.scrollTop)}
           >
-            <div className="w-[45vw] ml-3">{children}</div>
+            <div className="w-[45vw] ml-3 ">{children}</div>
           </div>
           <div
             className={`h-[1px] w-[45vw] mb-5 ${
@@ -158,6 +185,15 @@ function DefaultLayout({ children }) {
                 value={message}
                 className="text-[1.5rem] resize-none pl-[8.8rem] pr-[9.5rem] py-5 w-[92%] h-[4.8rem] rounded-[1rem] bg-[white] dark:bg-[#212121] dark:placeholder:text-[#dcdcdcb3] placeholder:text-[#a2acb4] dark:text-white text-black outline-none"
                 placeholder="メッセージを入力"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault(); // ⛔ Ngăn không cho xuống dòng
+                    if (message.trim() !== "") {
+                      sendMessage();
+                      setCheck(false);
+                    }
+                  }
+                }}
                 onChange={(e) => {
                   checkBtn(e.target.value);
                   setMessage(e.target.value);
@@ -185,7 +221,9 @@ function DefaultLayout({ children }) {
                       : undefined
                   }
                   className={`text-[2.3rem] group-hover:text-white ${
-                    check ? "text-[rgb(135,116,225)]" : "text-[#7c7c7c]"
+                    check
+                      ? "dark:text-[rgb(135,116,225)] text-[#71d446]"
+                      : "text-[#7c7c7c]"
                   }`}
                 />
               </div>

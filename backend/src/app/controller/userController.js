@@ -2,12 +2,19 @@ import User from "../models/User.js";
 import Message from "../models/Message.js";
 import Room from "../models/Room.js";
 class userController {
-  chat(req, res) {
-    res.send("ok");
+  async timkiem(req, res) {
+    try {
+      const query = req.query.query || "";
+      const users = await User.find({
+        name: { $regex: query, $options: "i" },
+      });
+      res.status(200).json({ users });
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
   }
   async message(req, res) {
     const { user, receiver } = req.body;
-    console.log("cac", user, receiver);
     const room = await Room.findOne({
       isGroup: false, // Direct chat (1-1)
       members: {
@@ -44,7 +51,6 @@ class userController {
         message: "Thêm bạn thành công",
       });
     } catch (error) {
-      console.error(error);
       return res.status(500).json({
         success: false,
         message: "Lỗi máy chủ",
@@ -84,7 +90,6 @@ class userController {
         message: "Xóa bạn thành công",
       });
     } catch (error) {
-      console.error(error);
       return res.status(500).json({
         success: false,
         message: "Lỗi máy chủ",

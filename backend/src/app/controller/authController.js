@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 
 class authController {
   async dangky(req, res) {
-    const { username, password, confirmPassword } = req.body;
+    const { username, name, password, confirmPassword } = req.body;
     if (await User.findOne({ username: username })) {
       return res
         .status(400)
@@ -30,6 +30,7 @@ class authController {
     const hashedPassword = await bcrypt.hash(password, 10);
     await User.create({
       username,
+      name: name,
       password: hashedPassword,
     });
     res.status(200).json({
@@ -62,7 +63,7 @@ class authController {
     );
     res.cookie("token", token, {
       httpOnly: true,
-      maxAge: 100 * 60 * 1000,
+      maxAge: 10 * 60 * 1000,
     });
     return res.status(200).json({
       success: true,
@@ -78,13 +79,20 @@ class authController {
     const rooms = await Room.find({
       members: { $in: [user._id] },
     }).populate("lastMessage");
-    console.log(rooms);
     res.status(200).json({
       success: true,
       message: "Đã đăng nhập",
       user: user,
       users: users,
       rooms: rooms,
+    });
+  }
+  async dangxuat(req, res) {
+    res.clearCookie("token", {
+      httpOnly: true,
+    });
+    return res.status(200).json({
+      success: true,
     });
   }
 }

@@ -6,5 +6,6 @@ const router = express.Router();
 
 router.post("/dangky", App.dangky);
 router.post("/dangnhap", App.dangnhap);
+router.get("/dangxuat", App.dangxuat);
 router.get("/xacnhandangnhap", verifyToken, App.xacnhandangnhap);
 export default router;

@@ -1,20 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useContext } from "react";
 import { UserContext } from "../../UserContext.js";
 import { SidebarContext } from "../../SidebarContext";
 import ThemeToggle from "../ThemeToggle";
 import BoxSidebar from "../BoxSidebarAdd/index.js";
+
 import {
   faBars,
   FontAwesomeIcon,
   faMagnifyingGlass,
   faPlus,
-  faBookmark,
   faUser,
-  faGear,
   faUserGroup,
   faCircleHalfStroke,
   faArrowLeft,
+  faArrowRightFromBracket,
 } from "../../Icon";
 
 function Sidebar() {
@@ -23,18 +23,57 @@ function Sidebar() {
   const [hidden, setHidden] = useState(true);
   const [back, setBack] = useState(true);
   const friends = users.filter((user1) => user.friends.includes(user1._id));
-  const usersHaveMessage = users.filter((user1) =>
-    rooms.some((room) => {
-      return (
-        room.members.includes(user._id) && room.members.includes(user1._id)
-      );
-    })
-  );
   const [isOpen, setIsOpen] = useState(false);
-  const [boxSidebar, setBoxSidebar] = useState(usersHaveMessage);
+  const [usersHaveMessage, setUsersHaveMessage] = useState([]);
+  const [boxSidebar, setBoxSidebar] = useState([]);
+  useEffect(() => {
+    const filteredUsers = users.filter((user1) =>
+      rooms.some((room) => {
+        return (
+          room.members.includes(user._id) && room.members.includes(user1._id)
+        );
+      })
+    );
+    setUsersHaveMessage(filteredUsers);
+    setBoxSidebar(filteredUsers);
+  }, [rooms, users, user._id]);
+  const handleSearch = (e) => {
+    const value = e.target.value;
+    if (value.trim() === "") {
+      setBoxSidebar(usersHaveMessage);
+      return;
+    }
+    try {
+      fetch(`http://localhost:8080/api/user/timkiem?query=${value}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setBoxSidebar(data.users);
+        });
+    } catch (err) {
+      console.error("Search error:", err);
+    }
+  };
   const checkOpen = () => {
     if (isOpen) setIsOpen(false);
     else setIsOpen(true);
+  };
+  const logout = () => {
+    try {
+      fetch("http://localhost:8080/api/auth/dangxuat", {
+        method: "GET",
+        credentials: "include", // Quan trọng!
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success) {
+            window.location.href = "/login-page";
+          } else {
+            console.log("Logout failed:", data.message);
+          }
+        });
+    } catch (err) {
+      console.log(err);
+    }
   };
   const backToUsersHaveMessage = () => {
     setBoxSidebar(usersHaveMessage);
@@ -62,7 +101,7 @@ function Sidebar() {
             <div
               className={`${
                 isOpen ? "" : "hidden"
-              }  w-[25rem] text-[1.4rem] font-[500] dark:text-[white] text-black h-[31rem] dark:bg-[rgba(33,33,33,0.867)] bg-[rgba(255,255,255,0.733)] shadow absolute top-[4.8rem] left-[0rem] backdrop-blur-[1rem] rounded-[0.75rem] `}
+              }  w-[25rem] text-[1.4rem] font-[500] dark:text-[white] text-black h-[28rem] dark:bg-[rgba(33,33,33,0.867)] bg-[rgba(255,255,255,0.733)] shadow absolute top-[4.8rem] left-[0rem] backdrop-blur-[1rem] rounded-[0.75rem] `}
             >
               <div className="flex items-center h-[3.2rem] py-[0.4rem] pr-[1.2rem] pl-[0.4rem] mx-[0.4rem] mt-[0.6rem] mb-[0.4rem] dark:hover:bg-[#00000066] hover:bg-[rgb(0,0,0,0.067)] rounded-[0.5rem] ">
                 <img
@@ -70,7 +109,7 @@ function Sidebar() {
                   alt=""
                   className="w-[2.4rem] h-[2.4rem] ml-[0.5rem] mr-[2rem] rounded-[0.75rem]"
                 />
-                <div>{user.username}</div>
+                <div>{user.name}</div>
               </div>
               <div className="dark:bg-[#FFFFFF1A] bg-[#0000001A] h-[0.1rem] w-full"></div>
               <div
@@ -102,13 +141,6 @@ function Sidebar() {
                 />
                 <div>マイプロフィール</div>
               </div>
-              <div className="flex items-center h-[3.2rem] py-[0.4rem] pr-[1.2rem] pl-[0.4rem] mx-[0.4rem] my-[0.4rem] dark:hover:bg-[#00000066] hover:bg-[rgb(0,0,0,0.067)] rounded-[0.5rem]">
-                <FontAwesomeIcon
-                  icon={faBookmark}
-                  className=" text-[1.6rem] dark:text-[rgb(170,170,170)] text-[rgb(112,117,121)] ml-[0.7rem] mr-[2.2rem]"
-                />
-                <div>保存されたメッセージ</div>
-              </div>
               <div
                 onClick={() => {
                   setBoxSidebar(friends);
@@ -124,13 +156,6 @@ function Sidebar() {
                 />
                 <div>連絡先</div>
               </div>
-              <div className="flex items-center h-[3.2rem] py-[0.4rem] pr-[1.2rem] pl-[0.4rem] mx-[0.4rem] my-[0.4rem] dark:hover:bg-[#00000066] hover:bg-[rgb(0,0,0,0.067)] rounded-[0.5rem]">
-                <FontAwesomeIcon
-                  icon={faGear}
-                  className=" text-[1.6rem] dark:text-[rgb(170,170,170)] text-[rgb(112,117,121)] ml-[0.7rem] mr-[2.2rem]"
-                />
-                <div>設定</div>
-              </div>
               <div className="flex items-center  h-[3.2rem] py-[0.4rem] pr-[1.2rem] pl-[0.4rem] mx-[0.4rem] my-[0.4rem] dark:hover:bg-[#00000066] hover:bg-[rgb(0,0,0,0.067)] rounded-[0.5rem]">
                 <FontAwesomeIcon
                   icon={faCircleHalfStroke}
@@ -138,6 +163,16 @@ function Sidebar() {
                 />
                 <div>ナイトモード</div>
                 <ThemeToggle />
+              </div>
+              <div
+                onClick={logout}
+                className="flex items-center h-[3.2rem] py-[0.4rem] pr-[1.2rem] pl-[0.4rem] mx-[0.4rem] my-[0.4rem] dark:hover:bg-[#00000066] hover:bg-[rgb(0,0,0,0.067)] rounded-[0.5rem]"
+              >
+                <FontAwesomeIcon
+                  icon={faArrowRightFromBracket}
+                  className=" text-[1.6rem] dark:text-[rgb(170,170,170)] text-[rgb(112,117,121)] ml-[0.7rem] mr-[2.2rem]"
+                />
+                <div>ログアウト</div>
               </div>
               <div className="h-[3.55rem] w-full flex items-center justify-center mt-3 cursor-default">
                 <div className="text-[#AAAAAA] text-[1.3rem]">
@@ -148,13 +183,14 @@ function Sidebar() {
           </div>
           <input
             type="text"
-            className="dark:bg-[#2C2C2C] bg-[#f4f4f5] dark:placeholder:text-[#dcdcdcb3] placeholder:text-[#70757980] text-white w-[28.2rem] ml-[1rem]  h-[4.4rem] rounded-[2.2rem] p-[0.6rem_0.9rem_0.7rem_4.9rem]  outline-none
+            className="dark:bg-[#2C2C2C] bg-[#f4f4f5] dark:placeholder:text-[#dcdcdcb3] placeholder:text-[#70757980] dark:text-white text-black w-[28.2rem] ml-[1rem]  h-[4.4rem] rounded-[2.2rem] p-[0.6rem_0.9rem_0.7rem_4.9rem]  outline-none
             border-2
             dark:border-[#2C2C2C] border-[white]
             dark:focus:border-[rgb(135,116,225)] focus:border-[#71d446]
             dark:focus:bg-[#1e1e1e] focus:bg-[white]
             focus:outline-none text-[1.6rem]"
             placeholder="検索"
+            onChange={handleSearch}
           />
           <FontAwesomeIcon
             icon={faMagnifyingGlass}
