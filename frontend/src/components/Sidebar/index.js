@@ -44,7 +44,7 @@ function Sidebar() {
       return;
     }
     try {
-      fetch(`http://localhost:8080/api/user/timkiem?query=${value}`)
+      fetch(`${process.env.REACT_APP_API_URL}/api/user/timkiem?query=${value}`)
         .then((res) => res.json())
         .then((data) => {
           setBoxSidebar(data.users);
@@ -59,7 +59,7 @@ function Sidebar() {
   };
   const logout = () => {
     try {
-      fetch("http://localhost:8080/api/auth/dangxuat", {
+      fetch("https://2fzjvlbl-3000.asse.devtunnels.ms//api/auth/dangxuat", {
         method: "GET",
         credentials: "include", // Quan trọng!
       })

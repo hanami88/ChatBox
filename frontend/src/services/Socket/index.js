@@ -1,9 +1,8 @@
 import { io } from "socket.io-client";
 
 const socketConnect = (user) => {
-  return io("http://localhost:8080", {
+  return io(`${process.env.REACT_APP_API_URL}`, {
     auth: { user },
-    transports: ["websocket"], // bắt buộc dùng websocket, tránh lỗi polling
   });
 };
 

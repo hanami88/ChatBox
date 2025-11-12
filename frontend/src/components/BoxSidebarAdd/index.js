@@ -34,7 +34,7 @@ function BoxSidebar({ contents, hidden }) {
     }
   };
   const addFriend = (friend) => {
-    fetch("http://localhost:8080/api/user/themban", {
+    fetch(`${process.env.REACT_APP_API_URL}/api/user/themban`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -47,7 +47,7 @@ function BoxSidebar({ contents, hidden }) {
       });
   };
   const deleteFriend = (friend) => {
-    fetch("http://localhost:8080/api/user/xoaban", {
+    fetch(`${process.env.REACT_APP_API_URL}/api/user/xoaban`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -11,13 +11,16 @@ function RegisterPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:8080/api/auth/dangky", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json", // 🟢 Cực kỳ quan trọng
-        },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch(
+        `${process.env.REACT_APP_API_URL}/api/auth/dangky`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json", // 🟢 Cực kỳ quan trọng
+          },
+          body: JSON.stringify(formData),
+        }
+      );
       const data = await res.json();
       alert(data.message);
       if (data.success) {

@@ -37,7 +37,7 @@ function App() {
     socket = socketConnect(user);
   }
   useEffect(() => {
-    fetch("http://localhost:8080/api/auth/xacnhandangnhap", {
+    fetch(`${process.env.REACT_APP_API_URL}/api/auth/xacnhandangnhap`, {
       method: "GET",
       credentials: "include",
     })
@@ -48,7 +48,7 @@ function App() {
         setUsers(data.users);
         setRooms(data.rooms);
       });
-  }, []);
+  }, []); //
   return (
     <Router>
       <div className="App w-[100vw] h-[100vh]">

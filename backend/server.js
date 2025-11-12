@@ -11,7 +11,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:3000", // domain FE của bạn
+    origin: "https://2fzjvlbl-3000.asse.devtunnels.ms", // domain FE của bạn
     credentials: true, // Cho phép gửi cookie qua request
   })
 );

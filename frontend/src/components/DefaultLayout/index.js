@@ -48,7 +48,7 @@ function DefaultLayout({ children }) {
     }
   };
   const setNavMessage = (receiver) => {
-    fetch("http://localhost:8080/api/user/message", {
+    fetch(`${process.env.REACT_APP_API_URL}/api/user/message`, {
       method: "POST",
       credentials: "include",
       headers: {
