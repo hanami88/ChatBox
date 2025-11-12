@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const Database = async () => {
   try {
-    await mongoose.connect("mongodb://127.0.0.1:27017/Chatbox");
+    await mongoose.connect(`${process.env.MONGO_URL}`);
     console.log("ket noi database thanh cong");
   } catch (err) {
     console.log("khong ket noi duoc database :" + error);

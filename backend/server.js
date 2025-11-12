@@ -8,10 +8,10 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 
 const app = express();
-
+dotenv.config();
 app.use(
   cors({
-    origin: "https://2fzjvlbl-3000.asse.devtunnels.ms", // domain FE của bạn
+    origin: `${process.env.REACT_URL}`, // domain FE của bạn
     credentials: true, // Cho phép gửi cookie qua request
   })
 );
@@ -19,7 +19,6 @@ app.use(cookieParser());
 
 app.use(express.json()); // ← Parse JSON body
 app.use(express.urlencoded({ extended: true }));
-dotenv.config();
 
 await Database();
 
@@ -29,5 +28,5 @@ const server = http.createServer(app);
 setupSocket(server);
 
 server.listen(8080, () => {
-  console.log(`🚀 Server running on http://localhost:8080`);
+  console.log(`🚀 Server running on http://localhost:${process.env.PORT}`);
 });
