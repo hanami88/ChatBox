@@ -83,6 +83,7 @@ Client (React)
 
 ## 👥 Friend Requests
 <img width="1440" height="686" alt="image" src="https://github.com/user-attachments/assets/4a5c15fc-f93c-4ea2-bfb7-5d4d9499feb7" />
+<img width="1437" height="682" alt="image" src="https://github.com/user-attachments/assets/c41b9c5a-5a8b-45d4-ad61-32f20fe76123" />
 <img width="1439" height="684" alt="image" src="https://github.com/user-attachments/assets/c763ca30-0431-491a-8eb8-7c46c5dd3f34" />
 
 ## Profile
