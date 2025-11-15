@@ -31,7 +31,7 @@ With a fully dynamic backend and a polished frontend, Yuu Connect brings convers
 - 🕒 **Live Message Updates** — See the latest messages and timestamps instantly.  
 - ⚡ **Dynamic User Status** — Online/offline indicators and typing status in real time.  
 - 🔒 **Secure Authentication** — JWT + cookies to protect user sessions.  
-- 🎨 **Modern UI** — Clean and intuitive design inspired by Telegram’s simplicity.  
+- 🎨 **Modern UI** — Clean, intuitive design with dark mode support. 
 
 ---
 
