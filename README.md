@@ -78,13 +78,15 @@ Client (React)
 <img width="1440" height="779" alt="Ảnh màn hình 2025-10-28 lúc 10 42 40" src="https://github.com/user-attachments/assets/ce152dce-e01e-4e48-8ecc-9d5d583532dd" />
 
 ## 💬 Chat Interface
-<img width="1436" height="689" alt="Ảnh màn hình 2025-10-28 lúc 11 08 51" src="https://github.com/user-attachments/assets/bcffc747-c89c-47f3-9b28-fe792549fa88" />
-<img width="1434" height="691" alt="Ảnh màn hình 2025-10-28 lúc 11 12 12" src="https://github.com/user-attachments/assets/d1e588e0-c611-4368-944b-2d738680cd5b" />
+<img width="1440" height="685" alt="image" src="https://github.com/user-attachments/assets/e7ae4c04-96d4-4670-ac43-f1c491d8f99c" />
+<img width="1440" height="690" alt="image" src="https://github.com/user-attachments/assets/93b10253-59c1-4754-9e25-9717a5f473be" />
 
 ## 👥 Friend Requests
-<img width="1438" height="691" alt="Ảnh màn hình 2025-10-28 lúc 11 15 30" src="https://github.com/user-attachments/assets/1d9e5df0-0d1b-486d-beec-19a930598def" />
-<img width="1439" height="691" alt="Ảnh màn hình 2025-10-28 lúc 11 15 15" src="https://github.com/user-attachments/assets/d2d51a22-7bf3-4e52-ab7e-e458ca82d71f" />
+<img width="1440" height="686" alt="image" src="https://github.com/user-attachments/assets/4a5c15fc-f93c-4ea2-bfb7-5d4d9499feb7" />
+<img width="1439" height="684" alt="image" src="https://github.com/user-attachments/assets/c763ca30-0431-491a-8eb8-7c46c5dd3f34" />
 
+## Profile
+<img width="1439" height="685" alt="image" src="https://github.com/user-attachments/assets/13299376-6abc-4aea-9380-3e9cc5fa488e" />
 
 ## 🙏 Thank You
 
