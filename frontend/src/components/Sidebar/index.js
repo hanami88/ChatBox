@@ -59,7 +59,7 @@ function Sidebar() {
   };
   const logout = () => {
     try {
-      fetch("https://2fzjvlbl-3000.asse.devtunnels.ms//api/auth/dangxuat", {
+      fetch(`${process.env.REACT_APP_API_URL}/api/auth/dangxuat`, {
         method: "GET",
         credentials: "include", // Quan trọng!
       })
