@@ -14,11 +14,12 @@ class userController {
     }
   }
   async message(req, res) {
-    const { user, receiver } = req.body;
+    const { receiverId } = req.body;
+    const userId = req.id;
     const room = await Room.findOne({
       isGroup: false, // Direct chat (1-1)
       members: {
-        $all: [user, receiver],
+        $all: [userId, receiverId],
         $size: 2, // Đảm bảo chỉ có 2 người
       },
     });
@@ -33,7 +34,8 @@ class userController {
 
   async themban(req, res) {
     try {
-      const { userid, friendid } = req.body;
+      const userid = req.id;
+      const { friendid } = req.body;
       const user = await User.findById(userid);
       const friend = await User.findById(friendid);
       if (!user || !friend) {
@@ -60,18 +62,17 @@ class userController {
 
   async xoaban(req, res) {
     try {
-      const { userid, friendid } = req.body;
-
+      console.log("cacscacsacacsacacsacacsacacsacacsacacsacacsacacsacacsaa");
+      const userid = req.id;
+      const { friendid } = req.body;
       const user = await User.findById(userid);
       const friend = await User.findById(friendid);
-
       if (!user || !friend) {
         return res.status(404).json({
           success: false,
           message: "Không tìm thấy người dùng",
         });
       }
-
       // Xóa friendid khỏi danh sách bạn của user
       user.friends = user.friends.filter(
         (id) => id.toString() !== friendid.toString()
@@ -84,7 +85,6 @@ class userController {
 
       await user.save();
       await friend.save();
-
       return res.status(200).json({
         success: true,
         message: "Xóa bạn thành công",

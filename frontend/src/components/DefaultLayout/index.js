@@ -14,8 +14,8 @@ import {
 } from "../../Icon";
 import { useState, useEffect, useRef } from "react";
 import { useContext } from "react";
-import { UserContext } from "../../UserContext.js";
-import { SidebarContext } from "../../SidebarContext.js";
+import { UserContext } from "../../Contexts/UserContext.js";
+import { SidebarContext } from "../../Contexts/SidebarContext.js";
 function DefaultLayout({ children }) {
   const { user, socket } = useContext(UserContext);
   const [check, setCheck] = useState(false);
@@ -54,7 +54,7 @@ function DefaultLayout({ children }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ user, receiver }),
+      body: JSON.stringify({ receiverId: receiver._id }),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -143,7 +143,7 @@ function DefaultLayout({ children }) {
               showProfile ? " w-[50vw]" : "w-[75vw] "
             }  fixed top-0 left-[25vw]  h-[5.6rem] dark:bg-[#212121] bg-[white] shadowname flex justify-between items-center `}
           >
-            <div className="flex items-center ml-[2vw] w-[30rem] ">
+            <div className="flex items-center ml-[2vw] w-[30vw] ">
               <img
                 src={nav && nav.avatar}
                 alt="anh"

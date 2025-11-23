@@ -1,7 +1,8 @@
 import { Fragment } from "react/jsx-runtime";
 import { useContext, useState, useEffect } from "react";
-import { UserContext } from "../../UserContext.js";
-import { SidebarContext } from "../../SidebarContext.js";
+import { UserContext } from "../../Contexts/UserContext.js";
+import { SidebarContext } from "../../Contexts/SidebarContext.js";
+import { toast } from "react-toastify";
 function BoxSidebar({ contents, hidden }) {
   const { user, rooms } = useContext(UserContext);
   const { setNavMessage, setNav } = useContext(SidebarContext);
@@ -36,27 +37,37 @@ function BoxSidebar({ contents, hidden }) {
   const addFriend = (friend) => {
     fetch(`${process.env.REACT_APP_API_URL}/api/user/themban`, {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ userid: user._id, friendid: friend._id }),
+      body: JSON.stringify({ friendid: friend._id }),
     })
       .then((res) => res.json())
       .then((data) => {
-        alert(data.message);
+        if (data.success) {
+          toast.success(data.message, { autoClose: 1000 });
+        } else {
+          toast.error(data.message, { autoClose: 1000 });
+        }
       });
   };
   const deleteFriend = (friend) => {
     fetch(`${process.env.REACT_APP_API_URL}/api/user/xoaban`, {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ userid: user._id, friendid: friend._id }),
+      body: JSON.stringify({ friendid: friend._id }),
     })
       .then((res) => res.json())
       .then((data) => {
-        alert(data.message);
+        if (data.success) {
+          toast.success(data.message, { autoClose: 1000 });
+        } else {
+          toast.error(data.message, { autoClose: 1000 });
+        }
       });
   };
   const [isFriend, setIsFriend] = useState(arrayCheckFriend);
@@ -81,7 +92,7 @@ function BoxSidebar({ contents, hidden }) {
                   setSelectedDiv(content._id);
                 }}
                 key={index}
-                className={`relative h-[7.2rem] w-[95%] rounded-[1.2rem] cursor-pointer flex items-center justify-between
+                className={`relative h-[7.2rem] w-[95%] min-w-[30rem] rounded-[1.2rem] cursor-pointer flex items-center justify-between
                   ${
                     selectedDiv === content._id
                       ? "dark:bg-[rgb(118,106,200,1)] bg-[#71d446]" // ✅ màu khi được chọn
@@ -92,15 +103,15 @@ function BoxSidebar({ contents, hidden }) {
                   <img
                     src={content.avatar}
                     alt="logo"
-                    className="w-[5.4rem] h-[5.4rem] rounded-[1rem] ml-4 "
+                    className="w-[5.4rem] min-w-[5.4rem] min-h-[5.4rem] h-[5.4rem] rounded-[1rem] ml-4 mr-4 "
                   />
                   <div
                     className={`${
                       !content.onlineStatus && "hidden"
-                    } absolute bottom-[0rem] right-[0rem] w-[1.8rem] h-[1.8rem] bg-[#24832C] border-2 rounded-full`}
+                    } absolute bottom-[0rem] right-[0rem] w-[1.8rem]  h-[1.8rem] bg-[#24832C] border-2 rounded-full`}
                   ></div>
                 </div>
-                <div className="w-[27rem]  rounded-[1.2rem]">
+                <div className="w-[18.7vw] min-w-[20rem] rounded-[1.2rem] ">
                   <div className="flex items-center justify-between">
                     <div
                       className={`text-[1.6rem] font-[600] mb-[0.1rem]  ${

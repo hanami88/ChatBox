@@ -44,9 +44,11 @@ class authController {
     const { username, password } = req.body;
     const user = await User.findOne({ username });
     const users = await User.find();
-    const rooms = await Room.find({
-      members: { $in: [user._id] },
-    }).populate("lastMessage");
+    const rooms =
+      user &&
+      (await Room.find({
+        members: { $in: [user._id] },
+      }).populate("lastMessage"));
     if (!user) {
       return res
         .status(400)
@@ -74,18 +76,24 @@ class authController {
     });
   }
   async xacnhandangnhap(req, res) {
-    const user = await User.findById(req.id);
-    const users = await User.find();
-    const rooms = await Room.find({
-      members: { $in: [user._id] },
-    }).populate("lastMessage");
-    res.status(200).json({
-      success: true,
-      message: "Đã đăng nhập",
-      user: user,
-      users: users,
-      rooms: rooms,
-    });
+    try {
+      const user = await User.findById(req.id);
+      console.log(user);
+      const users = await User.find();
+      const rooms =
+        user &&
+        (await Room.find({
+          members: { $in: [user._id] },
+        }).populate("lastMessage"));
+      res.status(200).json({
+        success: true,
+        user: user,
+        users: users,
+        rooms: rooms,
+      });
+    } catch (err) {
+      console.log("error:", err);
+    }
   }
   async dangxuat(req, res) {
     res.clearCookie("token", {
@@ -93,6 +101,7 @@ class authController {
     });
     return res.status(200).json({
       success: true,
+      message: "Đăng xuất thành công ",
     });
   }
 }

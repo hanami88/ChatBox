@@ -1,6 +1,6 @@
 import { FontAwesomeIcon, faXmark, faPhone, faPencil } from "../../Icon";
-import { SidebarContext } from "../../SidebarContext";
-import { UserContext } from "../../UserContext";
+import { SidebarContext } from "../../Contexts/SidebarContext";
+import { UserContext } from "../../Contexts/UserContext";
 import { useContext } from "react";
 function Profile() {
   const { user } = useContext(UserContext);

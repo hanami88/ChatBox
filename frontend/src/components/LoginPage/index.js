@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function LoginPage({ setLoading, setUser, setUsers, setRooms }) {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -10,26 +11,27 @@ function LoginPage({ setLoading, setUser, setUsers, setRooms }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/auth/dangnhap`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-          credentials: "include",
-        }
-      );
-      const data = await res.json();
-      alert(data.message);
-      if (data.success) {
-        setLoading(true);
-        setUser(data.user);
-        setUsers(data.users);
-        setRooms(data.rooms);
-        navigate("/");
-      }
+      fetch(`${process.env.REACT_APP_API_URL}/api/auth/dangnhap`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+        credentials: "include",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success) {
+            toast.success(data.message, { autoClose: 1000 });
+            setLoading(true);
+            setUser(data.user);
+            setUsers(data.users);
+            setRooms(data.rooms);
+            navigate("/");
+          } else {
+            toast.error(data.message, { autoClose: 1000 });
+          }
+        });
     } catch (err) {
       console.log("Lỗi :", err);
     }

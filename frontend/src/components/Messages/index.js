@@ -1,6 +1,6 @@
 import { useEffect, useContext, Fragment, useState, useRef } from "react";
-import { UserContext } from "../../UserContext.js";
-import { SidebarContext } from "../../SidebarContext.js";
+import { UserContext } from "../../Contexts/UserContext.js";
+import { SidebarContext } from "../../Contexts/SidebarContext.js";
 function Messages() {
   const { user, socket, changeMessageRoom, setRooms, rooms } =
     useContext(UserContext);

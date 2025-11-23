@@ -2,6 +2,7 @@ import DefaultLayout from "./components/DefaultLayout";
 import Messages from "./components/Messages";
 import LoginPage from "./components/LoginPage";
 import RegisterPage from "./components/RegisterPage";
+import { ToastContainer } from "react-toastify";
 import {
   BrowserRouter as Router,
   Routes,
@@ -39,6 +40,7 @@ function App() {
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/api/auth/xacnhandangnhap`, {
       method: "GET",
+      headers: { "Content-Type": "application/json" },
       credentials: "include",
     })
       .then((res) => res.json())
@@ -48,10 +50,11 @@ function App() {
         setUsers(data.users);
         setRooms(data.rooms);
       });
-  }, []); //
+  }, []);
   return (
     <Router>
       <div className="App w-[100vw] h-[100vh]">
+        <ToastContainer position="top-right" />
         <Routes>
           <Route
             path="/login-page"

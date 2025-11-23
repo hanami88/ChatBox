@@ -107,3 +107,8 @@ code {
   background: #8774e1;
   box-shadow: inset -3px -2px 5px -2px #ffd700, inset -10px -4px 0 0 #ffd700;
 }
+.Toastify__toast {
+  font-size: 17px;
+  font-weight: 600;
+  color: #000000;
+}

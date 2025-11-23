@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom";
-import { UserContext } from "../../UserContext.js";
+import { UserContext } from "../../Contexts/UserContext";
 function PrivateRouter({
   children,
   user,
