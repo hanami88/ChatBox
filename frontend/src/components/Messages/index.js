@@ -29,7 +29,7 @@ function Messages() {
       }
     });
     return () => socket.disconnect();
-  }, [socket]);
+  }, [socket, changeMessageRoom, rooms, setChat, setRooms]);
   return (
     <Fragment>
       {chat &&
@@ -43,7 +43,7 @@ function Messages() {
             {user._id === sender._id && (
               <div
                 className={`${
-                  showTimeId != index && "hidden"
+                  showTimeId !== index && "hidden"
                 } text-[1.2rem] self-end  self-center px-[1.2rem] h-[3.2rem] flex justify-center items-center rounded-[1rem] mr-1 dark:bg-[#ffffffb0] bg-[#000000af]
                   dark:text-[black] text-[white]
               }`}
@@ -78,7 +78,7 @@ function Messages() {
             {user._id !== sender._id && (
               <div
                 className={`${
-                  showTimeId != index && "hidden"
+                  showTimeId !== index && "hidden"
                 } text-[1.2rem] self-end  self-center px-[1.2rem] h-[3.2rem] flex justify-center items-center rounded-[1rem] ml-1 dark:bg-[#ffffffb0] bg-[#000000af]
                   dark:text-[black] text-[white]
               }`}

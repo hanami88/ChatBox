@@ -78,7 +78,6 @@ class authController {
   async xacnhandangnhap(req, res) {
     try {
       const user = await User.findById(req.id);
-      console.log(user);
       const users = await User.find();
       const rooms =
         user &&

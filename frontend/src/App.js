@@ -13,8 +13,8 @@ import { useState, useEffect } from "react";
 import PrivateRouter from "./components/PrivateRouter";
 import socketConnect from "./services/Socket";
 function App() {
-  const [user, setUser] = useState(false);
-  const [users, setUsers] = useState(false);
+  const [user, setUser] = useState(null);
+  const [users, setUsers] = useState(null);
   const [loading, setLoading] = useState(null);
   const [rooms, setRooms] = useState([]);
   const changeMessageRoom = (roomId, message) => {

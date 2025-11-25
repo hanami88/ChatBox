@@ -62,7 +62,6 @@ class userController {
 
   async xoaban(req, res) {
     try {
-      console.log("cacscacsacacsacacsacacsacacsacacsacacsacacsacacsacacsaa");
       const userid = req.id;
       const { friendid } = req.body;
       const user = await User.findById(userid);

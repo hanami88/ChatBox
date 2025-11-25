@@ -29,12 +29,12 @@ const setupSocket = (server) => {
         });
         first = true;
       }
-      const presentmessage = await Message.create({
+      const presentMessage = await Message.create({
         sender: user,
         roomId: room._id,
         content: message,
       });
-      room.lastMessage = presentmessage._id;
+      room.lastMessage = presentMessage._id;
       await room.save();
       // Gửi lại cho tất cả client, kèm theo thông tin người gửi
       const presentRoom = await Room.findById(room._id).populate("lastMessage");
@@ -48,7 +48,7 @@ const setupSocket = (server) => {
         });
       }
       // 4️⃣ Gửi lại cho chính người gửi để hiển thị luôn
-      io.to(users.get(user._id)).emit("message", {
+      socket.emit("message", {
         user,
         roomId: room._id,
         message,

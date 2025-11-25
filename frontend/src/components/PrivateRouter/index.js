@@ -25,7 +25,6 @@ function PrivateRouter({
       value={{
         user,
         setRooms,
-        loading,
         users,
         socket,
         rooms,

@@ -80,7 +80,7 @@ function DefaultLayout({ children }) {
             let time1 = null;
             if (now.getDate() - date.getDate() > 7) {
               time1 = `${hours}:${minutes} ${days}/${months}/${years}`;
-            } else if (now.getDate() - date.getDate() == 0) {
+            } else if (now.getDate() - date.getDate() === 0) {
               time1 = `${hours}:${minutes}`;
             } else {
               time1 = `${hours}:${minutes} ${dayName}`;
